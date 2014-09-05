@@ -1,0 +1,10 @@
+<h2>User Profiles</h2>
+<ul>
+  <% @profiles.each do |profile| %>
+  <li>Name: <%= profile["name"] %></li>
+  <li>Age: <%= profile["age"] %></li>
+  <li>Location: <%= profile["location"] %></li>
+  <li>Favorite ice-cream flavor: <%= profile["favorite ice-cream flavor"] %></li>
+  <br></br>
+  <% end %>
+</ul>
