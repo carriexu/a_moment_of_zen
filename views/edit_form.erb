@@ -1,18 +1,34 @@
-<form action="/profile/edit" method="POST">
-          <input type='hidden' name='_method' value="PUT" />
-          <label for="name">Update My Personal Information</label>
-          <br></br>
-          <label for="name">Name: </label>
-          <input id="name" type="text" name="name">
-          <br></br>
-          <label for="age">Age: </label>
-          <input id="age" type="text" name="age">
-          <br></br>
-          <label for="location">Location: </label>
-          <input id="location" type="text" name="location">
-          <br></br>
-          <label for="ice cream flavor">Favorite Ice-cream Flavor: </label>
-          <input id="ice cream flavor" type="text" name="favorite ice-cream flavor">
-          <br></br>
-          <input type="submit" value="Update"/>
-  </form>
+<a href="/">Home</a>
+<h2>Update My Personal Profile</h2>
+<section class="edit_profile_form">
+     <form action="/profile/edit" method="POST">
+               <input type='hidden' name='_method' value="PUT" />
+               <!-- <label for="name">Update My Personal Information</label> -->
+               <br></br>
+               <label for="name">Name: </label>
+               <input id="name" type="text" name="name">
+               <br></br>
+               <label for="age">Age: </label>
+               <input id="age" type="text" name="age">
+               <br></br>
+               <label for="location">Location: </label>
+               <input id="location" type="text" name="location">
+               <br></br>
+               <label for="ice cream flavor">Favorite Ice-cream Flavor: </label>
+               <input id="ice cream flavor" type="text" name="favorite ice-cream flavor">
+               <br></br>
+               <label for="feeds">Choose Your feeds: </label>
+               <br></br>
+               <label for="nytimes_most_popular">NYTimes Most Popular Articles</label>
+               <input id="nytimes_most_popular" type="checkbox" name="nytimes_most_popular" value="<%= profile["nytimes_most_popular"] %>">
+               <br></br>
+               <label for="nytimes_article_search">NYTimes Search For Articles</label>
+               <input id="nytimes_article_search" type="checkbox" name="nytimes_article_search">
+               <br></br>
+               <label for="local_weather">Local Weather</label>
+               <input id="local_weather" type="checkbox" name="local_weather">
+               <br></br>
+               <input type="submit" value="Update"/>
+       </form>
+</section>
+

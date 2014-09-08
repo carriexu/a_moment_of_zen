@@ -8,9 +8,22 @@
   </form>
 </section>
 
+<section class="location_bar">
+  <form action="/feed" method="POST">
+    <br></br>
+    <input id="city" type="text" placeholder="City" required name="city">
+    <input id="state" type="text" placeholder="State" required name="state">
+    <input type="submit" value="Update Location"/>
+  </form>
+</section>
+
+<section class="weather">
+  <p>The current temperature in <%= @city.gsub("%20", " ") %>, <%= @state %> is <%= @temp_in_f %> degrees.</p>
+</section>
+
 <section class="nytimes_articles">
   <section class="nytimes_most_popular">
-    <h2>NYTimes Most Popular Stories</h2>
+    <h2>Most Popular Stories</h2>
     <% @parsed_response["results"].each do |article| %>
       <a href="<%= article["url"] %>"><%= article["title"] %></a>
       <p><%= article["abstract"] %></p>
@@ -19,8 +32,7 @@
   </section>
 
   <section class="nytimes_searched">
-    <h2>You searched for <%= @q %>: </h2>
-    <h2>Searched Stories</h2>
+    <h2>Searched: Stories on <%= @q %></h2>
     <% @search_parsed_response["response"]["docs"].each do |article| %>
       <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
       <p><%= article["snippet"] %></p>
@@ -29,7 +41,4 @@
   </section>
 </section>
 
-<section class="weather">
-  <p>The temperature is <%= @temp_in_f %> degrees.</p>
-</section>
 

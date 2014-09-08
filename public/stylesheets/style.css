@@ -17,6 +17,10 @@ p{
   color: black;
 }
 
+h2{
+  text-align: center;
+}
+
 .nytimes_articles{
   overflow: hidden;
   position: relative;
@@ -44,11 +48,11 @@ p{
 }
 
 .weather{
-  border: solid 0.2em white;
-  border-radius: 2em;
-  width: 20%;
-  position: relative;
-  float: right;
+  float: left;
+  /*border: solid 0.2em white;
+  border-radius: 2em;*/
+  margin: 5px;
+  text-align: center;
 }
 
 .search_bar{
@@ -56,3 +60,22 @@ p{
   position: relative;
   float: right;
 }
+
+.profile_info{
+  text-align: right;
+  padding: 1% 1% 1%;
+  border: solid 0.2em white;
+  border-radius: 2em;
+  width: 20%;
+  margin: 0 auto;
+}
+
+.edit_profile_form{
+  padding: 1% 1% 1%;
+  text-align: right;
+  border: solid 0.2em white;
+  border-radius: 2em;
+  width: 35%;
+  margin: 0 auto;
+}
+

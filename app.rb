@@ -110,18 +110,20 @@ class App < Sinatra::Base
 
 
   get('/feed') do
+    profile = JSON.parse $redis.get("profile:1")
+
     response = HTTParty.get("http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/1.json?api-key=#{NYTIMES_MOST_POPULAR_API_KEYS}")
     @parsed_response = JSON.parse response.to_json
 
-    weather = HTTParty.get("http://api.wunderground.com/api/#{WUNDERGROUND_API_KEYS}/conditions/geolookup/conditions/q/NY/New%20York.json")
-    @temp_in_f = weather["current_observation"]["temp_f"]
-
-    profile = JSON.parse $redis.get("profile:1")
+    # binding.pry
+    @city = profile["city"].gsub(" ", "%20")
+    @state = profile["state"].gsub(" ", "%20")
+    response = HTTParty.get("http://api.wunderground.com/api/#{WUNDERGROUND_API_KEYS}/conditions/geolookup/conditions/q/#{@state}/#{@city}.json")
+    @temp_in_f = response["current_observation"]["temp_f"]
 
     @q =  profile["query"]
     search_response = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{@q}&api-key=#{NYTIMES_ARTICLE_SEARCH_API_KEYS}")
     @search_parsed_response = JSON.parse search_response.to_json
-    # binding.pry
 
     render(:erb, :show)
   end
@@ -158,12 +160,14 @@ class App < Sinatra::Base
   end
 
   post('/feed') do
-    # @q = params["query"]
     original_profile = JSON.parse $redis.get("profile:1")
     updated_profile = JSON.parse $redis.get("profile:1")
+
     updated_profile["query"] = params["query"]
+    updated_profile["city"] = params["city"]
+    updated_profile["state"] = params["state"]
     really_updated_profile = original_profile.merge(updated_profile) do |key, oldval, newval|
-      if newval == ""
+      if newval == nil
         oldval
       else
         newval
@@ -180,6 +184,9 @@ class App < Sinatra::Base
     updated_profile["age"] = params["age"]
     updated_profile["location"] = params["location"]
     updated_profile["favorite ice-cream flavor"] = params["favorite ice-cream flavor"]
+    updated_profile["nytimes_most_popular"] = params["nytimes_most_popular"]
+    updated_profile["nytimes_article_search"] = params["nytimes_article_search"]
+    updated_profile["local_weather"] = params["local_weather"]
 
     really_updated_profile = original_profile.merge(updated_profile) do |key, oldval, newval|
       if newval == ""
@@ -188,6 +195,7 @@ class App < Sinatra::Base
         newval
       end
     end
+    binding.pry
     $redis.set("profile:1", really_updated_profile.to_json)
     redirect to('/profile')
   end
