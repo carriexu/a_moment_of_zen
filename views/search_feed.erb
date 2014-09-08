@@ -1,6 +1,41 @@
 <h2>You searched for <%= @q %>: </h2>
-<% @parsed_response["response"]["docs"].each do |article| %>
+<% @search_parsed_response["response"]["docs"].each do |article| %>
   <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
   <p><%= article["snippet"] %></p>
   <br></br>
 <% end %>
+
+
+
+<section class="nytimes_searched">
+  <h2>Searched Stories</h2>
+  <% binding.pry %>
+  <% @search_parsed_response["response"]["docs"].each do |article| %>
+    <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
+    <p><%= article["snippet"] %></p>
+    <br></br>
+  <% end %>
+</section
+
+<section class="nytimes_searched">
+  <h2>You searched for <%= @q %>: </h2>
+  <% @binding.pry %>
+  <h2>Searched Stories</h2>
+  <% @search_parsed_response["response"]["docs"].each do |article| %>
+    <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
+    <p><%= article["snippet"] %></p>
+    <br></br>
+  <% end %>
+</section>
+/feed/:query
+
+
+<section class="nytimes_searched">
+  <h2>You searched for <%= @q %>: </h2>
+  <h2>Searched Stories</h2>
+  <% @search_parsed_response["response"]["docs"].each do |article| %>
+    <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
+    <p><%= article["snippet"] %></p>
+    <br></br>
+  <% end %>
+</section>

@@ -17,7 +17,7 @@ p{
   color: black;
 }
 
-.nytimes{
+.nytimes_most_popular{
   padding: 3% 3% 3%;
   border: solid 0.2em white;
 /*  background-color: lightblue;*/
@@ -25,6 +25,14 @@ p{
   border-radius: 2em;
   width: 40%;
   margin-left: 3%;
+}
+
+.nytimes_searched{
+  padding: 3% 3% 3%;
+  border: solid 0.2em white;
+  border-radius: 2em;
+  width: 40%;
+  margin-right: 3%;
 }
 
 .weather{

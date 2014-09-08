@@ -55,6 +55,7 @@ class App < Sinatra::Base
   ########################
 
   get('/') do
+    # Instagram OAuth
     base_url = "https://api.instagram.com/oauth/authorize"
     scope = "user"
     state = SecureRandom.urlsafe_base64
@@ -66,6 +67,7 @@ class App < Sinatra::Base
   end
 
   get('/oauth_callback') do
+    # Instagram OAuth
     # puts session
     # state = params[:state]
     code = params[:code]
@@ -110,26 +112,28 @@ class App < Sinatra::Base
   get('/feed') do
     response = HTTParty.get("http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/1.json?api-key=#{NYTIMES_MOST_POPULAR_API_KEYS}")
     @parsed_response = JSON.parse response.to_json
-    render(:erb, :show)
-  end
-
-  get('/feed/:id') do
-    # feed_id = params[:id]
-    # if feed_id == "nytimes"
-    article_response = HTTParty.get("http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/1.json?api-key=#{NYTIMES_MOST_POPULAR_API_KEYS}")
-    @parsed_response = JSON.parse article_response.to_json
 
     weather = HTTParty.get("http://api.wunderground.com/api/#{WUNDERGROUND_API_KEYS}/conditions/geolookup/conditions/q/NY/New%20York.json")
     @temp_in_f = weather["current_observation"]["temp_f"]
+
+    profile = JSON.parse $redis.get("profile:1")
+    @q =  profile["query"]
+    search_response = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{@q}&api-key=#{NYTIMES_ARTICLE_SEARCH_API_KEYS}")
+    @search_parsed_response = JSON.parse search_response.to_json
+    # binding.pry
+
     render(:erb, :show)
   end
 
+
+
   # gives back specific nytimes articles according to the search key word
   # get('/feed/:query') do
-  #   @q = params[:query]
+  #   @q = params["query"]
+  #   binding.pry
   #   response = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{@q}&api-key=#{NYTIMES_ARTICLE_SEARCH_API_KEYS}")
-  #   @parsed_response = JSON.parse response.to_json
-  #   render(:erb, :search_feed)
+  #   @search_parsed_response = JSON.parse response.to_json
+  #   render(:erb, :show)
   # end
 
 
@@ -150,6 +154,22 @@ class App < Sinatra::Base
     client.home_timeline
     # twitter_response = HTTParty.get("https://api.twitter.com/1.1/statuses/home_timeline.json")
 
+  end
+
+  post('/feed') do
+    # @q = params["query"]
+    original_profile = JSON.parse $redis.get("profile:1")
+    updated_profile = JSON.parse $redis.get("profile:1")
+    updated_profile["query"] = params["query"]
+    really_updated_profile = original_profile.merge(updated_profile) do |key, oldval, newval|
+      if newval == ""
+        oldval
+      else
+        newval
+      end
+    end
+    $redis.set("profile:1", really_updated_profile.to_json)
+    redirect to('/feed')
   end
 
   put('/profile/edit') do
@@ -176,3 +196,12 @@ class App < Sinatra::Base
     model
   end
 end
+  # get('/feed/:id') do
+  #   # feed_id = params[:id]
+  #   # if feed_id == "nytimes"
+  #   article_response = HTTParty.get("http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/1.json?api-key=#{NYTIMES_MOST_POPULAR_API_KEYS}")
+  #   @parsed_response = JSON.parse article_response.to_json
+
+  #   binding.pry
+  #   render(:erb, :show)
+  # end
