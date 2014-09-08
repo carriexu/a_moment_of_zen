@@ -105,6 +105,10 @@ class App < Sinatra::Base
   end
 
   get('/profile/edit') do
+    @profiles = []
+    $redis.keys('*profile*').each do |key|
+      @profiles << get_model_from_redis(key)
+    end
     render(:erb, :edit_form)
   end
 
@@ -195,7 +199,7 @@ class App < Sinatra::Base
         newval
       end
     end
-    binding.pry
+
     $redis.set("profile:1", really_updated_profile.to_json)
     redirect to('/profile')
   end

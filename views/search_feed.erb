@@ -49,3 +49,63 @@
       <br></br>
     <% end %>
   </section>
+
+
+<% if profile["nytimes_most_popular"] == "on" and profile["nytimes_article_search"] != "on" and profile["local_weather"] != "on"%>
+                         <label for="nytimes_most_popular">NYTimes Most Popular Articles</label>
+                         <input id="nytimes_most_popular" type="checkbox" name="nytimes_most_popular" checked>
+                         <br></br>
+                         <label for="nytimes_article_search">NYTimes Search For Articles</label>
+                         <input id="nytimes_article_search" type="checkbox" name="nytimes_article_search">
+                         <br></br>
+                         <label for="local_weather">Local Weather</label>
+                         <input id="local_weather" type="checkbox" name="local_weather">
+                         <br></br>
+                    <% elsif profile["nytimes_article_search"] == "on" and profile["nytimes_most_popular"] != "on" and profile["local_weather"] != "on" %>
+                         <label for="nytimes_article_search">NYTimes Search For Articles</label>
+                         <input id="nytimes_article_search" type="checkbox" name="nytimes_article_search" checked>
+                         <br></br>
+                         <label for="nytimes_most_popular">NYTimes Most Popular Articles</label>
+                         <input id="nytimes_most_popular" type="checkbox" name="nytimes_most_popular">
+                         <br></br>
+                         <label for="local_weather">Local Weather</label>
+                         <input id="local_weather" type="checkbox" name="local_weather">
+                         <br></br>
+                    <% elsif profile["local_weather"] == "on" and profile["nytimes_most_popular"] != "on" and profile["nytimes_article_search"] != "on" %>
+                         <label for="local_weather">Local Weather</label>
+                         <input id="local_weather" type="checkbox" name="local_weather" checked>
+                         <br></br>
+                         <label for="nytimes_article_search">NYTimes Search For Articles</label>
+                         <input id="nytimes_article_search" type="checkbox" name="nytimes_article_search">
+                         <br></br>
+                         <label for="nytimes_most_popular">NYTimes Most Popular Articles</label>
+                         <input id="nytimes_most_popular" type="checkbox" name="nytimes_most_popular">
+                         <br></br>
+
+
+<% @profiles.each do |profile| %>
+
+
+               <% end %>
+ <% if profile["nytimes_most_popular"] == "on" %>
+                         <label for="nytimes_most_popular">NYTimes Most Popular Articles</label>
+                         <input id="nytimes_most_popular" type="checkbox" name="nytimes_most_popular" checked>
+                         <br></br>
+                    <% elsif profile["nytimes_article_search"] == "on" %>
+                         <label for="nytimes_article_search">NYTimes Search For Articles</label>
+                         <input id="nytimes_article_search" type="checkbox" name="nytimes_article_search" checked>
+                         <br></br>
+                    <% elsif profile["local_weather"] == "on" %>
+                         <label for="local_weather">Local Weather</label>
+                         <input id="local_weather" type="checkbox" name="local_weather" checked>
+                         <br></br>
+                    <% else %>
+                         <label for="nytimes_most_popular">NYTimes Most Popular Articles</label>
+                         <input id="nytimes_most_popular" type="checkbox" name="nytimes_most_popular">
+                         <br></br>
+                         <label for="nytimes_article_search">NYTimes Search For Articles</label>
+                         <input id="nytimes_article_search" type="checkbox" name="nytimes_article_search">
+                         <br></br>
+                         <label for="local_weather">Local Weather</label>
+                         <input id="local_weather" type="checkbox" name="local_weather">
+                         <br></br>

@@ -19,15 +19,32 @@
                <br></br>
                <label for="feeds">Choose Your feeds: </label>
                <br></br>
-               <label for="nytimes_most_popular">NYTimes Most Popular Articles</label>
-               <input id="nytimes_most_popular" type="checkbox" name="nytimes_most_popular" value="<%= profile["nytimes_most_popular"] %>">
-               <br></br>
-               <label for="nytimes_article_search">NYTimes Search For Articles</label>
-               <input id="nytimes_article_search" type="checkbox" name="nytimes_article_search">
-               <br></br>
-               <label for="local_weather">Local Weather</label>
-               <input id="local_weather" type="checkbox" name="local_weather">
-               <br></br>
+               <% @profiles.each do |profile| %>
+                    <label for="nytimes_most_popular">NYTimes Most Popular Articles</label>
+                    <% if profile["nytimes_most_popular"] == "on" %>
+                         <input id="nytimes_most_popular" type="checkbox" name="nytimes_most_popular" checked>
+                    <% else %>
+                         <input id="nytimes_most_popular" type="checkbox" name="nytimes_most_popular">
+                    <% end %>
+                    <br></br>
+
+                    <label for="nytimes_article_search">NYTimes Search For Articles</label>
+                    <% if profile["nytimes_article_search"] == "on" %>
+                         <input id="nytimes_article_search" type="checkbox" name="nytimes_article_search" checked>
+                    <% else %>
+                         <input id="nytimes_article_search" type="checkbox" name="nytimes_article_search">
+                    <% end %>
+                    <br></br>
+
+                    <label for="local_weather">Local Weather</label>
+                    <% if profile["local_weather"] == "on" %>
+                         <input id="local_weather" type="checkbox" name="local_weather" checked>
+                    <% else %>
+                         <input id="local_weather" type="checkbox" name="local_weather">
+                    <% end %>
+                    <br></br>
+
+               <% end %>
                <input type="submit" value="Update"/>
        </form>
 </section>

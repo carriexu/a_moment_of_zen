@@ -8,9 +8,9 @@
     "query": "food",
     "city": "New York",
     "state": "NY",
-    "nytimes_most_popular": "on",
-    "nytimes_article_search": "on",
-    "local_weather": "on"
+    "nytimes_most_popular": "off",
+    "nytimes_article_search": "off",
+    "local_weather": "off"
   }
   ]
 }

@@ -13,12 +13,27 @@
     <br></br>
     Current Feeds:
     <br></br>
-    NYTimes Most Popular Articles: <%= profile["nytimes_most_popular"] %>
-    <br></br>
-    NYTimes Search For Articles: <%= profile["nytimes_article_search"] %>
-    <br></br>
-    Local Weather: <%= profile["local_weather"] %>
-    <br></br>
+
+      <% if profile["nytimes_most_popular"] == "on" %>
+        NYTimes Most Popular Articles: <%= profile["nytimes_most_popular"] %>
+      <% else %>
+        NYTimes Most Popular Articles: off
+      <% end %>
+      <br></br>
+
+      <% if profile["nytimes_article_search"] == "on" %>
+        NYTimes Search For Articles: <%= profile["nytimes_article_search"] %>
+      <% else %>
+        NYTimes Search For Articles: off
+      <% end %>
+      <br></br>
+
+      <% if profile["local_weather"] == "on" %>
+        Local Weather: <%= profile["local_weather"] %>
+      <% else %>
+        Local Weather: off
+      <% end %>
+      <br></br>
     <% end %>
     <a href="/profile/edit">Edit My Profile</a>
 </section>
