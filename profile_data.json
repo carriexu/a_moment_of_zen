@@ -10,7 +10,8 @@
     "state": "NY",
     "nytimes_most_popular": "off",
     "nytimes_article_search": "off",
-    "local_weather": "off"
+    "local_weather": "off",
+    "twitter": "off"
   }
   ]
 }

@@ -47,4 +47,13 @@
   <% end %>
 </section>
 
+<% if @profile["twitter"] == "on" %>
+  <section class="twitter_my_timeline">
+    <h2>My Twitter Timeline</h2>
+    <% @my_tweets.each do |tweet| %>
+      <p><%= tweet %></p>
+      <br></br>
+    <% end %>
+  </section>
+<% end %>
 

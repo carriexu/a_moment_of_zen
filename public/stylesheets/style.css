@@ -79,3 +79,12 @@ h2{
   margin: 0 auto;
 }
 
+.twitter_my_timeline{
+  padding: 3% 2% 3%;
+  border: solid 0.2em white;
+  border-radius: 2em;
+  width: 38%;
+  margin-right: 3%;
+  position: relative;
+  float: right;
+}

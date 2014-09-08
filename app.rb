@@ -45,6 +45,8 @@ class App < Sinatra::Base
   TWITTER_API_SECRET = "QBlplAUdkdJIpGQLl3uOMG0HFgKv1aoSU8RiuVniYRHOF2zRVJ"
   TWITTER_ACCESS_TOKEN = "509730170-cACt75aeSelrZKpvUcMuGJrH2XIgcIK7GnUrw2rq"
   TWITTER_ACCESS_TOKEN_SECRET = "L1UixxGbq1kLRPdN00WunhIZczDbw8OdzGzCgiNqZvQUv"
+  # could not get below twitter username to work
+  # TWITTER_USERNAME = "carrielovesfood"
   WUNDERGROUND_API_KEYS = "414d6ac14863ad60"
   INSTAGRAM_CLIENT_ID = "b668170700ab4a2c8793bdcfcc875806"
   INSTAGRAM_CLIENT_SECRET = "175b08336c364ea18013ed373dd96f0b"
@@ -129,10 +131,21 @@ class App < Sinatra::Base
     search_response = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{@q}&api-key=#{NYTIMES_ARTICLE_SEARCH_API_KEYS}")
     @search_parsed_response = JSON.parse search_response.to_json
 
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key         = TWITTER_API_KEYS
+      config.consumer_secret      = TWITTER_API_SECRET
+      config.access_token         = TWITTER_ACCESS_TOKEN
+      config.access_token_secret  = TWITTER_ACCESS_TOKEN_SECRET
+    end
+    my_timeline = client.user_timeline("carrielovesfood")
+    @my_tweets = []
+    my_timeline.each do |tweet|
+      tweet_text = tweet.text
+      @my_tweets << tweet_text
+    end
+
     render(:erb, :show)
   end
-
-
 
   # gives back specific nytimes articles according to the search key word
   # get('/feed/:query') do
@@ -191,6 +204,7 @@ class App < Sinatra::Base
     updated_profile["nytimes_most_popular"] = params["nytimes_most_popular"]
     updated_profile["nytimes_article_search"] = params["nytimes_article_search"]
     updated_profile["local_weather"] = params["local_weather"]
+    updated_profile["twitter"] = params["twitter"]
 
     really_updated_profile = original_profile.merge(updated_profile) do |key, oldval, newval|
       if newval == ""

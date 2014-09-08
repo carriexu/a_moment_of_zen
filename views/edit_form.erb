@@ -44,6 +44,15 @@
                     <% end %>
                     <br></br>
 
+                    <label for="twitter_my_timeline">My Twitter Timeline</label>
+                    <% if profile["twitter"] == "on" %>
+                         <input id="twitter" type="checkbox" name="twitter" checked>
+                    <% else %>
+                         <input id="twitter" type="checkbox" name="twitter">
+                    <% end %>
+
+                    <br></br>
+
                <% end %>
                <input type="submit" value="Update"/>
        </form>

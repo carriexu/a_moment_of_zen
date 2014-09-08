@@ -34,6 +34,14 @@
         Local Weather: off
       <% end %>
       <br></br>
+
+      <% if profile["twitter"] == "on" %>
+        My Twitter Timeline: <%= profile["twitter"] %>
+      <% else %>
+        My Twitter Timeline: off
+      <% end %>
+      <br></br>
+
     <% end %>
     <a href="/profile/edit">Edit My Profile</a>
 </section>
