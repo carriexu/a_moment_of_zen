@@ -17,28 +17,42 @@ p{
   color: black;
 }
 
+.nytimes_articles{
+  overflow: hidden;
+  position: relative;
+  clear: both;
+}
+
 .nytimes_most_popular{
-  padding: 3% 3% 3%;
+  padding: 3% 2% 3%;
   border: solid 0.2em white;
-/*  background-color: lightblue;*/
-/*  background-color: transparent;*/
   border-radius: 2em;
-  width: 40%;
+  width: 38%;
   margin-left: 3%;
+  position: relative;
+  float: left;
 }
 
 .nytimes_searched{
-  padding: 3% 3% 3%;
+  padding: 3% 2% 3%;
   border: solid 0.2em white;
   border-radius: 2em;
-  width: 40%;
+  width: 38%;
   margin-right: 3%;
+  position: relative;
+  float: right;
 }
 
 .weather{
   border: solid 0.2em white;
   border-radius: 2em;
   width: 20%;
+  position: relative;
+  float: right;
+}
+
+.search_bar{
+  width: 500px;
   position: relative;
   float: right;
 }

@@ -3,33 +3,33 @@
 <section class="search_bar">
   <form action="/feed" method="POST">
     <br></br>
-    <input id="query" type="text" name="query">
+    <input id="query" type="text" placeholder="Search..." required name="query">
     <input type="submit" value="Search NYTimes"/>
   </form>
 </section>
 
-<section class="nytimes_most_popular">
-  <h2>NYTimes Most Popular Stories</h2>
-  <% @parsed_response["results"].each do |article| %>
-    <a href="<%= article["url"] %>"><%= article["title"] %></a>
-    <p><%= article["abstract"] %></p>
-    <br></br>
-  <% end %>
-</section>
+<section class="nytimes_articles">
+  <section class="nytimes_most_popular">
+    <h2>NYTimes Most Popular Stories</h2>
+    <% @parsed_response["results"].each do |article| %>
+      <a href="<%= article["url"] %>"><%= article["title"] %></a>
+      <p><%= article["abstract"] %></p>
+      <br></br>
+    <% end %>
+  </section>
 
-
-<section class="nytimes_searched">
-  <h2>You searched for <%= @q %>: </h2>
-  <h2>Searched Stories</h2>
-  <% @search_parsed_response["response"]["docs"].each do |article| %>
-    <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
-    <p><%= article["snippet"] %></p>
-    <br></br>
-  <% end %>
+  <section class="nytimes_searched">
+    <h2>You searched for <%= @q %>: </h2>
+    <h2>Searched Stories</h2>
+    <% @search_parsed_response["response"]["docs"].each do |article| %>
+      <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
+      <p><%= article["snippet"] %></p>
+      <br></br>
+    <% end %>
+  </section>
 </section>
 
 <section class="weather">
   <p>The temperature is <%= @temp_in_f %> degrees.</p>
 </section>
-
 

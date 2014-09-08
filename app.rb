@@ -117,6 +117,7 @@ class App < Sinatra::Base
     @temp_in_f = weather["current_observation"]["temp_f"]
 
     profile = JSON.parse $redis.get("profile:1")
+
     @q =  profile["query"]
     search_response = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{@q}&api-key=#{NYTIMES_ARTICLE_SEARCH_API_KEYS}")
     @search_parsed_response = JSON.parse search_response.to_json
