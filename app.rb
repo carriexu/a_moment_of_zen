@@ -114,18 +114,18 @@ class App < Sinatra::Base
 
 
   get('/feed') do
-    profile = JSON.parse $redis.get("profile:1")
+    @profile = JSON.parse $redis.get("profile:1")
 
     response = HTTParty.get("http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/1.json?api-key=#{NYTIMES_MOST_POPULAR_API_KEYS}")
     @parsed_response = JSON.parse response.to_json
 
     # binding.pry
-    @city = profile["city"].gsub(" ", "%20")
-    @state = profile["state"].gsub(" ", "%20")
+    @city = @profile["city"].gsub(" ", "%20")
+    @state = @profile["state"].gsub(" ", "%20")
     response = HTTParty.get("http://api.wunderground.com/api/#{WUNDERGROUND_API_KEYS}/conditions/geolookup/conditions/q/#{@state}/#{@city}.json")
     @temp_in_f = response["current_observation"]["temp_f"]
 
-    @q =  profile["query"]
+    @q =  @profile["query"]
     search_response = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{@q}&api-key=#{NYTIMES_ARTICLE_SEARCH_API_KEYS}")
     @search_parsed_response = JSON.parse search_response.to_json
 
