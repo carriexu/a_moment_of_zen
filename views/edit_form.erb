@@ -1,14 +1,4 @@
-<a href="/">Home</a>
-<h2>My Personal Profile</h2>
-<ul>
-  <% @profiles.each do |profile| %>
-  <li>Name: <%= profile["name"] %></li>
-  <li>Age: <%= profile["age"] %></li>
-  <li>Location: <%= profile["location"] %></li>
-  <li>Favorite ice-cream flavor: <%= profile["favorite ice-cream flavor"] %></li>
-  <br></br>
-
-  <!-- <form action="/profile" method="POST">
+<form action="/profile/edit" method="POST">
           <input type='hidden' name='_method' value="PUT" />
           <label for="name">Update My Personal Information</label>
           <br></br>
@@ -25,7 +15,4 @@
           <input id="ice cream flavor" type="text" name="favorite ice-cream flavor">
           <br></br>
           <input type="submit" value="Update"/>
-  </form> -->
-  <% end %>
-  <a href="/profile/edit">Edit My Profile</a>
-</ul>
+  </form>

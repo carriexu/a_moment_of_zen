@@ -1,0 +1,36 @@
+html {
+  background-image: url("http://cdn-media-1.lifehack.org/wp-content/files/2013/04/5-1024x640.jpg");
+  background-position: bottom left;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: left;
+}
+
+h1 {
+  font-size: 3em;
+  color: black;
+}
+
+p{
+  font-size: 1em;
+  color: black;
+}
+
+.nytimes{
+  padding: 3% 3% 3%;
+  border: solid 0.2em white;
+/*  background-color: lightblue;*/
+/*  background-color: transparent;*/
+  border-radius: 2em;
+  width: 40%;
+  margin-left: 3%;
+}
+
+.weather{
+  border: solid 0.2em white;
+  border-radius: 2em;
+  width: 20%;
+  position: relative;
+  float: right;
+}

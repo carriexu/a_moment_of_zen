@@ -1,0 +1,6 @@
+<h2>You searched for <%= @q %>: </h2>
+<% @parsed_response["response"]["docs"].each do |article| %>
+  <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
+  <p><%= article["snippet"] %></p>
+  <br></br>
+<% end %>
