@@ -57,3 +57,12 @@
   </section>
 <% end %>
 
+
+<section class="instagram_my_posts">
+  <h2>My Instagram</h2>
+  <% @insta_response["data"].each do |instagram| %>
+  <a href="<%= instagram["link"] %>"><img src="<%= instagram["images"]["low_resolution"]["url"] %>"/></a>
+  <a href="http://instagram.com/<%= instagram["user"]["username"] %>" %><%= instagram["user"]["username"] %></a>
+    <br></br>
+  <% end %>
+</section>

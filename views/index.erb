@@ -8,5 +8,5 @@
 <% if session[:access_token] %>
   <a href="/logout">Logout</a>
 <% else %>
-  <a href="<%= @uri %>">Login with Instagram</a>
+  <a href="<%= @instagram_uri %>">Login with Instagram</a>
 <% end %>
