@@ -56,7 +56,7 @@ class App < Sinatra::Base
   # INSTAGRAM_ACCESS_TOKEN = "391569309.b668170.c4cf70355fa4463690d0264ab3ce3d26"
   FACEBOOK_CLIENT_ID = "620638748048605"
   FACEBOOK_CLIENT_SECRET ="27b3f2001171930dcf0c475124972b12"
-  FACEBOOK_REDIRECT_URL = "http://infinite-spire-5264.herokuapp.com/oauth_callback/instagram"
+  FACEBOOK_REDIRECT_URL = "http://infinite-spire-5264.herokuapp.com/oauth_callback/facebook"
 
   ########################
   # Routes
