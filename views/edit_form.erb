@@ -45,10 +45,18 @@
                     <br></br>
 
                     <label for="twitter_my_timeline">My Twitter Timeline</label>
-                    <% if profile["twitter"] == "on" %>
-                         <input id="twitter" type="checkbox" name="twitter" checked>
+                    <% if profile["twitter_my_timeline"] == "on" %>
+                         <input id="twitter_my_timeline" type="checkbox" name="twitter_my_timeline" checked>
                     <% else %>
-                         <input id="twitter" type="checkbox" name="twitter">
+                         <input id="twitter_my_timeline" type="checkbox" name="twitter_my_timeline">
+                    <% end %>
+                    <br></br>
+
+                    <label for="twitter_search_result">Twitter Search Result</label>
+                    <% if profile["twitter_search_result"] == "on" %>
+                         <input id="twitter_search_result" type="checkbox" name="twitter_search_result" checked>
+                    <% else %>
+                         <input id="twitter_search_result" type="checkbox" name="twitter_search_result">
                     <% end %>
                     <br></br>
 

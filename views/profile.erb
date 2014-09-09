@@ -35,10 +35,17 @@
       <% end %>
       <br></br>
 
-      <% if profile["twitter"] == "on" %>
-        My Twitter Timeline: <%= profile["twitter"] %>
+      <% if profile["twitter_my_timeline"] == "on" %>
+        My Twitter Timeline: <%= profile["twitter_my_timeline"] %>
       <% else %>
         My Twitter Timeline: off
+      <% end %>
+      <br></br>
+
+      <% if profile["twitter_search_result"] == "on" %>
+        Twitter Search Result: <%= profile["twitter_search_result"] %>
+      <% else %>
+        Twitter Search Result: off
       <% end %>
       <br></br>
 

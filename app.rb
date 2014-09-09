@@ -176,13 +176,22 @@ class App < Sinatra::Base
       tweet_text = tweet.text
       @my_tweets << tweet_text
     end
+    # Twitter Search Results display 5
+    @twitter_search_result = client.search("#{@q}", :result_type => "recent").take(5).collect do |tweet|
+      "#{tweet.user.screen_name}: #{tweet.text}"
+    end
+
+
     # Instagram My feed
     response = HTTParty.get("https://api.instagram.com/v1/users/self/feed?access_token=391569309.b668170.c4cf70355fa4463690d0264ab3ce3d26")
     @insta_response = JSON.parse response.to_json
-    # Instagram Searched Feed
+    # Instagram Searched by Tag Feed
+    # binding.pry
     response = HTTParty.get("https://api.instagram.com/v1/tags/#{@q}/media/recent?access_token=391569309.b668170.c4cf70355fa4463690d0264ab3ce3d26")
     @insta_searched_response = JSON.parse response.to_json
     render(:erb, :show)
+    # Instagram Searched by Location Feed
+    # https://api.instagram.com/v1/locations/514276/media/recent?access_token=ACCESS-TOKEN
     # Facebook
     # binding.pry
     # # response = HTTParty.get("http://graph.facebook.com/endpoint?key=value&access_token=app_id|app_secret")
@@ -218,7 +227,8 @@ class App < Sinatra::Base
     updated_profile["nytimes_most_popular"] = params["nytimes_most_popular"]
     updated_profile["nytimes_article_search"] = params["nytimes_article_search"]
     updated_profile["local_weather"] = params["local_weather"]
-    updated_profile["twitter"] = params["twitter"]
+    updated_profile["twitter_my_timeline"] = params["twitter_my_timeline"]
+    updated_profile["twitter_search_result"] = params["twitter_search_result"]
     updated_profile["instagram_my_feed"] = params["instagram_my_feed"]
     updated_profile["instagram_searched_feed"] = params["instagram_searched_feed"]
 

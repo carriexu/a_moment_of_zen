@@ -8,22 +8,7 @@
   </form>
 </section>
 
-<section class="location_bar">
-  <form action="/feed" method="POST">
-    <br></br>
-    <input id="city" type="text" placeholder="City" required name="city">
-    <input id="state" type="text" placeholder="State" required name="state">
-    <input type="submit" value="Update Location"/>
-  </form>
-</section>
-
-<section class="my_feeds">
-  <% if @profile["local_weather"] == "on" %>
-    <section class="weather">
-      <p>The current temperature in <%= @city.gsub("%20", " ") %>, <%= @state %> is <%= @temp_in_f %> degrees.</p>
-    </section>
-  <% end %>
-
+<section class="my_instagram">
   <% if @profile["instagram_my_feed"] == "on" %>
     <section class="instagram_my_feed">
       <h2>My Instagram</h2>
@@ -51,6 +36,23 @@
       <% end %>
     </section>
   <% end %>
+</section>
+
+<section class="my_feeds">
+  <section class="location_bar">
+    <form action="/feed" method="POST">
+      <br></br>
+      <input id="city" type="text" placeholder="City" required name="city">
+      <input id="state" type="text" placeholder="State" required name="state">
+      <input type="submit" value="Update Location"/>
+    </form>
+  </section>
+
+  <% if @profile["local_weather"] == "on" %>
+    <section class="weather">
+      <p>The current temperature in <%= @city.gsub("%20", " ") %>, <%= @state %> is <%= @temp_in_f %> degrees.</p>
+    </section>
+  <% end %>
 
   <section class="nytimes_articles">
     <% if @profile["nytimes_most_popular"] == "on" %>
@@ -76,7 +78,7 @@
     <% end %>
   </section>
 
-  <% if @profile["twitter"] == "on" %>
+  <% if @profile["twitter_my_timeline"] == "on" %>
     <section class="twitter_my_timeline">
       <h2>My Twitter Timeline</h2>
       <% @my_tweets.each do |tweet| %>
@@ -86,4 +88,13 @@
     </section>
   <% end %>
 
+    <% if @profile["twitter_search_result"] == "on" %>
+    <section class="twitter_search_result">
+      <h2>Twitter Search Result</h2>
+      <% @twitter_search_result.each do |tweet| %>
+        <p><%= tweet %></p>
+        <br>
+      <% end %>
+    </section>
+  <% end %>
 </section>

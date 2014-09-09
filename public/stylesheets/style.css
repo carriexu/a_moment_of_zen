@@ -22,13 +22,14 @@ h2{
 }
 
 .my_feeds{
-  float: left;
+  position: absolute;
+  width: 30%;
+  right: 3%;
 }
 
 .nytimes_articles{
   overflow: hidden;
   position: relative;
-  clear: both;
 }
 
 .nytimes_most_popular{
@@ -36,8 +37,6 @@ h2{
   border: solid 0.2em white;
   border-radius: 2em;
   width: 38%;
-  margin-left: 3%;
-  position: relative;
   float: left;
   height: 100vh;
   overflow-y:auto;
@@ -48,23 +47,26 @@ h2{
   border: solid 0.2em white;
   border-radius: 2em;
   width: 38%;
-  margin-right: 3%;
-  position: relative;
   float: right;
   height: 100vh;
   overflow-y:auto;
 }
 
 .weather{
-  float: left;
-  /*border: solid 0.2em white;
-  border-radius: 2em;*/
+  border: solid 0.2em white;
+  border-radius: 2em;
   margin: 5px;
   text-align: center;
 }
 
 .search_bar{
-  width: 500px;
+  width: 20%;
+  position: relative;
+  float: left;
+}
+
+.location_bar{
+  width: 20%;
   position: relative;
   float: right;
 }
@@ -87,20 +89,50 @@ h2{
   margin: 0 auto;
 }
 
+.my_feeds{
+  position: absolute;
+  right: 5%;
+}
+
 .twitter_my_timeline{
-  padding: 3% 2% 3%;
+  padding: 1% 2% 1%;
   border: solid 0.2em white;
   border-radius: 2em;
-  width: 38%;
+  width: 30%;
   margin-right: 3%;
   position: relative;
   float: right;
 }
 
+.twitter_search_result{
+  padding: 1% 2% 1%;
+  border: solid 0.2em white;
+  border-radius: 2em;
+  width: 30%;
+  margin-right: 3%;
+  position: relative;
+  float: right;
+  height: 100vh;
+  overflow-y:auto;
+}
+
+.my_instagram{
+  width: 60%;
+  left: 40%;
+  margin-left: 5%;
+}
 .instagram_my_feed{
   float: left;
   height: 100vh;
   overflow-y:auto;
+  left: 40%;
+}
+
+.instagram_searched_feed{
+  float: left;
+  height: 100vh;
+  overflow-y: auto;
+  left: 40%;
 }
 
 .insta_image{
@@ -118,3 +150,5 @@ h2{
   float: left;
   margin: 0 15px 15px 0;
 }
+
+

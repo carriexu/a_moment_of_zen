@@ -11,7 +11,8 @@
     "nytimes_most_popular": "off",
     "nytimes_article_search": "off",
     "local_weather": "off",
-    "twitter": "off",
+    "twitter_my_timeline": "off",
+    "twitter_search_result": "off",
     "instagram_my_feed": "off",
     "instagram_searched_feed": "off"
   }
