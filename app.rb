@@ -53,6 +53,9 @@ class App < Sinatra::Base
   INSTAGRAM_REDIRECT_URL = "http://127.0.0.1:9292/oauth_callback"
   # could not get below Instagram access token to work as a constant
   # INSTAGRAM_ACCESS_TOKEN = "391569309.b668170.c4cf70355fa4463690d0264ab3ce3d26"
+  FACEBOOK_CLIENT_ID = "620638748048605"
+  FACEBOOK_CLIENT_SECRET ="27b3f2001171930dcf0c475124972b12"
+  FACEBOOK_REDIRECT_URL = "http://127.0.0.1:9292/oauth_callback"
 
   ########################
   # Routes
@@ -65,12 +68,13 @@ class App < Sinatra::Base
     instagram_state = SecureRandom.urlsafe_base64
 
     facebook_base_url = "https://www.facebook.com/dialog/oauth"
-
+    facebook_scope = "public_profile"
+    facebook_state = SecureRandom.urlsafe_base64
     # storing state in session because we need to compare it in a later request
     session[:state] = instagram_state
 
     @instagram_uri = "#{instagram_base_url}?client_id=#{INSTAGRAM_CLIENT_ID}&redirect_uri=#{INSTAGRAM_REDIRECT_URL}&response_type=code&state=#{instagram_state}"
-
+    @facebook_uri = "#{facebook_base_url}?client_id=#{FACEBOOK_CLIENT_ID}&redirect_uri=#{FACEBOOK_REDIRECT_URL}&response_type=code&state=#{facebook_state}"
     render(:erb, :index)
   end
 
@@ -81,8 +85,7 @@ class App < Sinatra::Base
     code = params[:code]
     # compare the states to ensure the information is from who we think it is
     if session[:state] == params[:state]
-      # send a post
-      response = HTTParty.post("https://api.instagram.com/oauth/access_token",
+      instagram_response = HTTParty.post("https://api.instagram.com/oauth/access_token",
                               :body => {
                               client_id: INSTAGRAM_CLIENT_ID,
                               client_secret: INSTAGRAM_CLIENT_SECRET,
@@ -93,8 +96,21 @@ class App < Sinatra::Base
                               :headers =>{
                                 "Accept" => "application/json"
                                 })
-        session[:access_token] = response["access_token"]
-      end
+        session[:access_token] = instagram_response["access_token"]
+
+      facebook_response = HTTParty.post("https://graph.facebook.com/oauth/access_token",
+                              :body => {
+                                client_id: FACEBOOK_CLIENT_ID,
+                                redirect_uri: FACEBOOK_REDIRECT_URL,
+                                client_secret: FACEBOOK_CLIENT_SECRET,
+                                code: code
+                              },
+                              :headers =>{
+                                  "Accept" => "application/json"
+                                  })
+      session[:access_token] = facebook_response["access_token"]
+    end
+
     redirect to("/")
   end
 
@@ -153,6 +169,8 @@ class App < Sinatra::Base
     response = HTTParty.get("https://api.instagram.com/v1/users/self/feed?access_token=391569309.b668170.c4cf70355fa4463690d0264ab3ce3d26")
     @insta_response = JSON.parse response.to_json
     render(:erb, :show)
+    # Facebook
+
   end
 
   # gives back specific nytimes articles according to the search key word
