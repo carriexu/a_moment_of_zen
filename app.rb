@@ -50,12 +50,12 @@ class App < Sinatra::Base
   WUNDERGROUND_API_KEYS = "414d6ac14863ad60"
   INSTAGRAM_CLIENT_ID = "b668170700ab4a2c8793bdcfcc875806"
   INSTAGRAM_CLIENT_SECRET = "175b08336c364ea18013ed373dd96f0b"
-  INSTAGRAM_REDIRECT_URL = "http://127.0.0.1:9292/oauth_callback"
+  INSTAGRAM_REDIRECT_URL = "http://127.0.0.1:9292/oauth_callback/instagram"
   # could not get below Instagram access token to work as a constant
   # INSTAGRAM_ACCESS_TOKEN = "391569309.b668170.c4cf70355fa4463690d0264ab3ce3d26"
   FACEBOOK_CLIENT_ID = "620638748048605"
   FACEBOOK_CLIENT_SECRET ="27b3f2001171930dcf0c475124972b12"
-  FACEBOOK_REDIRECT_URL = "http://127.0.0.1:9292/oauth_callback"
+  FACEBOOK_REDIRECT_URL = "http://127.0.0.1:9292/oauth_callback/facebook"
 
   ########################
   # Routes
@@ -71,14 +71,16 @@ class App < Sinatra::Base
     facebook_scope = "public_profile"
     facebook_state = SecureRandom.urlsafe_base64
     # storing state in session because we need to compare it in a later request
-    session[:state] = instagram_state
+    # the following does not work, cannot set session[:state] to both instagram_state and facebook_state
+    # session[:state] = instagram_state
+    # session[:state] = facebook_state
 
     @instagram_uri = "#{instagram_base_url}?client_id=#{INSTAGRAM_CLIENT_ID}&redirect_uri=#{INSTAGRAM_REDIRECT_URL}&response_type=code&state=#{instagram_state}"
     @facebook_uri = "#{facebook_base_url}?client_id=#{FACEBOOK_CLIENT_ID}&redirect_uri=#{FACEBOOK_REDIRECT_URL}&response_type=code&state=#{facebook_state}"
     render(:erb, :index)
   end
 
-  get('/oauth_callback') do
+  get('/oauth_callback/instagram') do
     # Instagram OAuth
     # puts session
     # state = params[:state]
@@ -97,7 +99,13 @@ class App < Sinatra::Base
                                 "Accept" => "application/json"
                                 })
         session[:access_token] = instagram_response["access_token"]
+
     end
+    redirect to("/")
+  end
+
+  get('/oauth_callback/facebook') do
+    code = params[:code]
 
     if session[:state] == params[:state]
       facebook_response = HTTParty.post("https://graph.facebook.com/oauth/access_token",
@@ -110,9 +118,10 @@ class App < Sinatra::Base
                               :headers =>{
                                   "Accept" => "application/json"
                                   })
-      session[:access_token] = facebook_response["access_token"]
+      # a hack to get the access code
+      # session[:access_token] = facebook_response["access_token"]
+        session[:access_token] = facebook_response.to_s.split("&")[0].split("=")[1]
     end
-
     redirect to("/")
   end
 
@@ -141,7 +150,7 @@ class App < Sinatra::Base
   get('/feed') do
     @profile = JSON.parse $redis.get("profile:1")
     # NYTIMES Most Popular Stories
-    response = HTTParty.get("http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/1.json?api-key=#{NYTIMES_MOST_POPULAR_API_KEYS}")
+    response = HTTParty.get("http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/1.json?api-key=#{NYTIMES_MOST_POPULAR_API_KEYS}&offset=20")
     @parsed_response = JSON.parse response.to_json
 
     # your weather
@@ -170,12 +179,14 @@ class App < Sinatra::Base
     # Instagram My feed
     response = HTTParty.get("https://api.instagram.com/v1/users/self/feed?access_token=391569309.b668170.c4cf70355fa4463690d0264ab3ce3d26")
     @insta_response = JSON.parse response.to_json
+    # Instagram Searched Feed
+    response = HTTParty.get("https://api.instagram.com/v1/tags/#{@q}/media/recent?access_token=391569309.b668170.c4cf70355fa4463690d0264ab3ce3d26")
+    @insta_searched_response = JSON.parse response.to_json
     render(:erb, :show)
     # Facebook
     # binding.pry
     # # response = HTTParty.get("http://graph.facebook.com/endpoint?key=value&access_token=app_id|app_secret")
     # response = HTTParty.get("http://graph.facebook.com/me")
-
 
   end
   # updates the location and search keyword
@@ -208,7 +219,8 @@ class App < Sinatra::Base
     updated_profile["nytimes_article_search"] = params["nytimes_article_search"]
     updated_profile["local_weather"] = params["local_weather"]
     updated_profile["twitter"] = params["twitter"]
-    updated_profile["instagram"] = params["instagram"]
+    updated_profile["instagram_my_feed"] = params["instagram_my_feed"]
+    updated_profile["instagram_searched_feed"] = params["instagram_searched_feed"]
 
     really_updated_profile = original_profile.merge(updated_profile) do |key, oldval, newval|
       if newval == ""

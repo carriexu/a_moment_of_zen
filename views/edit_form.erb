@@ -53,10 +53,19 @@
                     <br></br>
 
                     <label for="instagram_my_feed">My Instagram Feed</label>
-                    <% if profile["instagram"] == "on" %>
-                         <input id="instagram" type="checkbox" name="instagram" checked>
+                    <% if profile["instagram_my_feed"] == "on" %>
+                         <input id="instagram_my_feed" type="checkbox" name="instagram_my_feed" checked>
                     <% else %>
-                         <input id="instagram" type="checkbox" name="instagram">
+                         <input id="instagram_my_feed" type="checkbox" name="instagram_my_feed">
+                    <% end %>
+
+                    <br></br>
+
+                    <label for="instagram_searched_feed">Instagram Search Results</label>
+                    <% if profile["instagram_searched_feed"] == "on" %>
+                         <input id="instagram_searched_feed" type="checkbox" name="instagram_searched_feed" checked>
+                    <% else %>
+                         <input id="instagram_searched_feed" type="checkbox" name="instagram_searched_feed">
                     <% end %>
 
                     <br></br>

@@ -42,10 +42,17 @@
       <% end %>
       <br></br>
 
-      <% if profile["instagram"] == "on" %>
-        My Instagram Timeline: <%= profile["instagram"] %>
+      <% if profile["instagram_my_feed"] == "on" %>
+        My Instagram Timeline: <%= profile["instagram_my_feed"] %>
       <% else %>
         My Instagram Timeline: off
+      <% end %>
+      <br></br>
+
+      <% if profile["instagram_searched_feed"] == "on" %>
+        Instagram Search Results: <%= profile["instagram_searched_feed"] %>
+      <% else %>
+        Instagram Search Results: off
       <% end %>
       <br></br>
 

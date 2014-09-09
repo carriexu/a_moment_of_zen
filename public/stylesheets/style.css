@@ -21,6 +21,10 @@ h2{
   text-align: center;
 }
 
+.my_feeds{
+  float: left;
+}
+
 .nytimes_articles{
   overflow: hidden;
   position: relative;
@@ -35,6 +39,8 @@ h2{
   margin-left: 3%;
   position: relative;
   float: left;
+  height: 100vh;
+  overflow-y:auto;
 }
 
 .nytimes_searched{
@@ -45,6 +51,8 @@ h2{
   margin-right: 3%;
   position: relative;
   float: right;
+  height: 100vh;
+  overflow-y:auto;
 }
 
 .weather{
@@ -87,4 +95,26 @@ h2{
   margin-right: 3%;
   position: relative;
   float: right;
+}
+
+.instagram_my_feed{
+  float: left;
+  height: 100vh;
+  overflow-y:auto;
+}
+
+.insta_image{
+  padding: 3% 1% 3%;
+  border: solid 0.2em white;
+  border-radius: 2em;
+  float: left;
+  margin: 0 15px 15px 0;
+}
+
+.insta_searched_image{
+  padding: 3% 1% 3%;
+  border: solid 0.2em white;
+  border-radius: 2em;
+  float: left;
+  margin: 0 15px 15px 0;
 }

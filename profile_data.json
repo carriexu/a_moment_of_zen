@@ -12,7 +12,8 @@
     "nytimes_article_search": "off",
     "local_weather": "off",
     "twitter": "off",
-    "instagram": "off"
+    "instagram_my_feed": "off",
+    "instagram_searched_feed": "off"
   }
   ]
 }
