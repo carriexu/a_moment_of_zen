@@ -2,7 +2,7 @@ require 'sinatra/base'
 require 'json'
 require 'redis'
 require 'httparty'
-require 'pry'
+require 'pry' if ENV["RACK_ENV"] == "development"
 require 'securerandom'
 require 'twitter'
 
