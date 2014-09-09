@@ -5,6 +5,7 @@ require 'httparty'
 require 'pry' if ENV["RACK_ENV"] == "development"
 require 'securerandom'
 require 'twitter'
+require 'uri'
 
 class App < Sinatra::Base
 
