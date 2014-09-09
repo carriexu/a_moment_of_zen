@@ -170,38 +170,11 @@ class App < Sinatra::Base
     @insta_response = JSON.parse response.to_json
     render(:erb, :show)
     # Facebook
+    # binding.pry
+    # response = HTTParty.get("graph.facebook.com/me")
 
   end
-
-  # gives back specific nytimes articles according to the search key word
-  # get('/feed/:query') do
-  #   @q = params["query"]
-  #   binding.pry
-  #   response = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{@q}&api-key=#{NYTIMES_ARTICLE_SEARCH_API_KEYS}")
-  #   @search_parsed_response = JSON.parse response.to_json
-  #   render(:erb, :show)
-  # end
-
-
-  get('/twitter') do
-
-    client = Twitter::REST::Client.new do |config|
-      config.consumer_key         = TWITTER_API_KEYS
-      config.consumer_secret      = TWITTER_API_SECRET
-      config.access_token         = TWITTER_ACCESS_TOKEN
-      config.access_token_secret  = TWITTER_ACCESS_TOKEN_SECRET
-    end
-
-    # topics = ["coffee", "tea"]
-    # client.filter(:track => topics.join(",")) do |object|
-    #   puts object.text if object.is_a?(Twitter::Tweet)
-    # end
-    binding.pry
-    client.home_timeline
-    # twitter_response = HTTParty.get("https://api.twitter.com/1.1/statuses/home_timeline.json")
-
-  end
-
+  # updates the location and search keyword
   post('/feed') do
     original_profile = JSON.parse $redis.get("profile:1")
     updated_profile = JSON.parse $redis.get("profile:1")
@@ -219,7 +192,7 @@ class App < Sinatra::Base
     $redis.set("profile:1", really_updated_profile.to_json)
     redirect to('/feed')
   end
-
+  # edits profile information and send to redis db
   put('/profile/edit') do
     original_profile = JSON.parse $redis.get("profile:1")
     updated_profile = JSON.parse $redis.get("profile:1")
@@ -231,6 +204,7 @@ class App < Sinatra::Base
     updated_profile["nytimes_article_search"] = params["nytimes_article_search"]
     updated_profile["local_weather"] = params["local_weather"]
     updated_profile["twitter"] = params["twitter"]
+    updated_profile["instagram"] = params["instagram"]
 
     really_updated_profile = original_profile.merge(updated_profile) do |key, oldval, newval|
       if newval == ""
@@ -249,12 +223,4 @@ class App < Sinatra::Base
     model
   end
 end
-  # get('/feed/:id') do
-  #   # feed_id = params[:id]
-  #   # if feed_id == "nytimes"
-  #   article_response = HTTParty.get("http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/1.json?api-key=#{NYTIMES_MOST_POPULAR_API_KEYS}")
-  #   @parsed_response = JSON.parse article_response.to_json
 
-  #   binding.pry
-  #   render(:erb, :show)
-  # end

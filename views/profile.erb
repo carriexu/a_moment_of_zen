@@ -42,6 +42,13 @@
       <% end %>
       <br></br>
 
+      <% if profile["instagram"] == "on" %>
+        My Instagram Timeline: <%= profile["instagram"] %>
+      <% else %>
+        My Instagram Timeline: off
+      <% end %>
+      <br></br>
+
     <% end %>
     <a href="/profile/edit">Edit My Profile</a>
 </section>
