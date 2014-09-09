@@ -27,32 +27,24 @@ h2{
   right: 3%;
 }
 
-.nytimes_articles{
-  overflow: hidden;
-  position: relative;
-}
-
 .nytimes_most_popular{
-  padding: 3% 2% 3%;
+  padding: 5%;
   border: solid 0.2em white;
   border-radius: 2em;
-  width: 38%;
-  float: left;
-  height: 100vh;
+  height: 50vh;
   overflow-y:auto;
 }
 
 .nytimes_searched{
-  padding: 3% 2% 3%;
+  padding: 5%;
   border: solid 0.2em white;
   border-radius: 2em;
-  width: 38%;
-  float: right;
-  height: 100vh;
+  height: 50vh;
   overflow-y:auto;
 }
 
 .weather{
+  padding: 5%;
   border: solid 0.2em white;
   border-radius: 2em;
   margin: 5px;
@@ -68,7 +60,6 @@ h2{
 .location_bar{
   width: 20%;
   position: relative;
-  float: right;
 }
 
 .profile_info{
@@ -89,30 +80,21 @@ h2{
   margin: 0 auto;
 }
 
-.my_feeds{
-  position: absolute;
-  right: 5%;
-}
-
 .twitter_my_timeline{
-  padding: 1% 2% 1%;
+  padding: 5%;
   border: solid 0.2em white;
   border-radius: 2em;
-  width: 30%;
-  margin-right: 3%;
   position: relative;
-  float: right;
+  height: 50vh;
+  overflow-y:auto;
 }
 
 .twitter_search_result{
-  padding: 1% 2% 1%;
+  padding: 5%;
   border: solid 0.2em white;
   border-radius: 2em;
-  width: 30%;
-  margin-right: 3%;
   position: relative;
-  float: right;
-  height: 100vh;
+  height: 50vh;
   overflow-y:auto;
 }
 

@@ -54,29 +54,27 @@
     </section>
   <% end %>
 
-  <section class="nytimes_articles">
-    <% if @profile["nytimes_most_popular"] == "on" %>
-      <section class="nytimes_most_popular">
-        <h2>Most Popular Stories</h2>
-        <% @parsed_response["results"].each do |article| %>
-          <a href="<%= article["url"] %>"><%= article["title"] %></a>
-          <p><%= article["abstract"] %></p>
-          <br></br>
-        <% end %>
-      </section>
-    <% end %>
+  <% if @profile["nytimes_article_search"] == "on" %>
+    <section class="nytimes_searched">
+      <h2>Searched: Stories on <%= @q %></h2>
+      <% @search_parsed_response["response"]["docs"].each do |article| %>
+        <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
+        <p><%= article["snippet"] %></p>
+        <br></br>
+      <% end %>
+    </section>
+  <% end %>
 
-    <% if @profile["nytimes_article_search"] == "on" %>
-      <section class="nytimes_searched">
-        <h2>Searched: Stories on <%= @q %></h2>
-        <% @search_parsed_response["response"]["docs"].each do |article| %>
-          <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
-          <p><%= article["snippet"] %></p>
-          <br></br>
-        <% end %>
-      </section>
-    <% end %>
-  </section>
+  <% if @profile["nytimes_most_popular"] == "on" %>
+    <section class="nytimes_most_popular">
+      <h2>Most Popular Stories</h2>
+      <% @parsed_response["results"].each do |article| %>
+        <a href="<%= article["url"] %>"><%= article["title"] %></a>
+        <p><%= article["abstract"] %></p>
+        <br></br>
+      <% end %>
+    </section>
+  <% end %>
 
   <% if @profile["twitter_my_timeline"] == "on" %>
     <section class="twitter_my_timeline">
