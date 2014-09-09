@@ -97,7 +97,9 @@ class App < Sinatra::Base
                                 "Accept" => "application/json"
                                 })
         session[:access_token] = instagram_response["access_token"]
+    end
 
+    if session[:state] == params[:state]
       facebook_response = HTTParty.post("https://graph.facebook.com/oauth/access_token",
                               :body => {
                                 client_id: FACEBOOK_CLIENT_ID,
@@ -171,7 +173,9 @@ class App < Sinatra::Base
     render(:erb, :show)
     # Facebook
     # binding.pry
-    # response = HTTParty.get("graph.facebook.com/me")
+    # # response = HTTParty.get("http://graph.facebook.com/endpoint?key=value&access_token=app_id|app_secret")
+    # response = HTTParty.get("http://graph.facebook.com/me")
+
 
   end
   # updates the location and search keyword

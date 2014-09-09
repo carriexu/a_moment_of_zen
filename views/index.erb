@@ -6,9 +6,15 @@
 </div>
 
 <% if session[:access_token] %>
-  <a href="/logout">Logout</a>
+  <a href="/logout">Logout of Instagram</a>
 <% else %>
   <a href="<%= @instagram_uri %>">Login with Instagram</a>
   <br></br>
+<% end %>
+
+<% if session[:access_token] %>
+  <a href="/logout">Logout of Facebook</a>
+<% else %>
   <a href="<%= @facebook_uri %>">Login with Facebook</a>
+  <br></br>
 <% end %>
