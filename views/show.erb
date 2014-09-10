@@ -34,7 +34,7 @@
 
       <% if @profile["instagram_searched_feed"] == "on" %>
         <section class="instagram_searched_feed">
-          <h2 id="section_title">Instagram - Searched for <%= @q %></h2>
+          <h2>Instagram - Searched for <%= @q %></h2>
           <% @insta_searched_response["data"].each do |instagram| %>
             <section class="insta_searched_image">
               <a href="<%= instagram["link"] %>"><img src="<%= instagram["images"]["low_resolution"]["url"] %>"/></a>
