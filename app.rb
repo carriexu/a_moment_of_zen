@@ -200,6 +200,10 @@ class App < Sinatra::Base
     # response = HTTParty.get("http://graph.facebook.com/me")
 
   end
+
+  # get('/feed/:feed_id') do
+  #   @profile = JSON.parse $redis.get("profile:1")
+  # end
   # updates the location and search keyword
   post('/feed') do
     original_profile = JSON.parse $redis.get("profile:1")
