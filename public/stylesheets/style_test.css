@@ -8,10 +8,13 @@ html {
 
 .search_bar{
   text-align: center;
-  padding: 5% 1% 1%;
-  position: absolute;
+  position: fixed;
   width: 100%;
   margin: 0 auto;
+}
+
+.my_instagram{
+  margin-top: 80px;
 }
 
 .instagram_my_feed{
