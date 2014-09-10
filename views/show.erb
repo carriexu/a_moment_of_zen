@@ -10,6 +10,8 @@
 
 
 <section class="my_feeds">
+
+  <section class="my_instagram">
     <% if @profile["instagram_my_feed"] == "on" %>
       <section class="instagram_my_feed">
         <h2>My Instagram</h2>
@@ -37,6 +39,8 @@
         <% end %>
       </section>
     <% end %>
+  </section>
+
 
   <section class="location_bar">
     <form action="/feed" method="POST">
