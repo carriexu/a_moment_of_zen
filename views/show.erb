@@ -1,7 +1,6 @@
 <a href="/">Home</a>
 
-<section class="my_feeds">
-
+<section class="container">
   <section class="search_bar">
     <form action="/feed" method="POST">
       <br></br>
@@ -10,93 +9,95 @@
     </form>
   </section>
 
-  <section class="my_instagram">
-    <% if @profile["instagram_my_feed"] == "on" %>
-      <section class="instagram_my_feed">
-        <h2>Instagram - My Feed</h2>
-        <% @insta_response["data"].each do |instagram| %>
-          <section class="insta_image">
-            <a href="<%= instagram["link"] %>"><img src="<%= instagram["images"]["low_resolution"]["url"] %>"/></a>
-            <br></br>
-            <a href="http://instagram.com/<%= instagram["user"]["username"] %>" %><%= instagram["user"]["username"] %></a>
-            <br></br>
-          </section>
-        <% end %>
-      </section>
+  <section class="my_feeds">
+    <section class="my_instagram">
+      <% if @profile["instagram_my_feed"] == "on" %>
+        <section class="instagram_my_feed">
+          <h2>Instagram - My Feed</h2>
+          <% @insta_response["data"].each do |instagram| %>
+            <section class="insta_image">
+              <a href="<%= instagram["link"] %>"><img src="<%= instagram["images"]["low_resolution"]["url"] %>"/></a>
+              <br></br>
+              <a href="http://instagram.com/<%= instagram["user"]["username"] %>" %><%= instagram["user"]["username"] %></a>
+              <br></br>
+            </section>
+          <% end %>
+        </section>
+        <br></br>
+      <% end %>
+
+      <% if @profile["instagram_searched_feed"] == "on" %>
+        <section class="instagram_searched_feed">
+          <h2>Instagram - Searched for <%= @q %></h2>
+          <% @insta_searched_response["data"].each do |instagram| %>
+            <section class="insta_searched_image">
+              <a href="<%= instagram["link"] %>"><img src="<%= instagram["images"]["low_resolution"]["url"] %>"/></a>
+              <br></br>
+              <a href="http://instagram.com/<%= instagram["user"]["username"] %>" %><%= instagram["user"]["username"] %></a>
+              <br></br>
+            </section>
+          <% end %>
+        </section>
+      <% end %>
       <br></br>
+    </section>
+
+
+    <section class="location_bar">
+      <form action="/feed" method="POST">
+        <br></br>
+        <input id="city" type="text" placeholder="City" required name="city">
+        <input id="state" type="text" placeholder="State" required name="state">
+        <input type="submit" value="Update Location"/>
+      </form>
+    </section>
+
+    <% if @profile["local_weather"] == "on" %>
+      <section class="weather">
+        <p>The current temperature in <%= @city.gsub("%20", " ") %>, <%= @state %> is <%= @temp_in_f %> degrees.</p>
+      </section>
     <% end %>
 
-    <% if @profile["instagram_searched_feed"] == "on" %>
-      <section class="instagram_searched_feed">
-        <h2>Instagram - Searched for <%= @q %></h2>
-        <% @insta_searched_response["data"].each do |instagram| %>
-          <section class="insta_searched_image">
-            <a href="<%= instagram["link"] %>"><img src="<%= instagram["images"]["low_resolution"]["url"] %>"/></a>
-            <br></br>
-            <a href="http://instagram.com/<%= instagram["user"]["username"] %>" %><%= instagram["user"]["username"] %></a>
-            <br></br>
-          </section>
+    <% if @profile["nytimes_article_search"] == "on" %>
+      <section class="nytimes_searched">
+        <h2>Searched: Stories on <%= @q %></h2>
+        <% @search_parsed_response["response"]["docs"].each do |article| %>
+          <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
+          <p><%= article["snippet"] %></p>
+          <br></br>
         <% end %>
       </section>
     <% end %>
-    <br></br>
+
+    <% if @profile["nytimes_most_popular"] == "on" %>
+      <section class="nytimes_most_popular">
+        <h2>Most Popular Stories</h2>
+        <% @parsed_response["results"].each do |article| %>
+          <a href="<%= article["url"] %>"><%= article["title"] %></a>
+          <p><%= article["abstract"] %></p>
+          <br></br>
+        <% end %>
+      </section>
+    <% end %>
+
+    <% if @profile["twitter_my_timeline"] == "on" %>
+      <section class="twitter_my_timeline">
+        <h2>My Twitter Timeline</h2>
+        <% @my_tweets.each do |tweet| %>
+          <p><%= tweet %></p>
+          <br></br>
+        <% end %>
+      </section>
+    <% end %>
+
+      <% if @profile["twitter_search_result"] == "on" %>
+      <section class="twitter_search_result">
+        <h2>Twitter Search Result</h2>
+        <% @twitter_search_result.each do |tweet| %>
+          <p><%= tweet %></p>
+          <br>
+        <% end %>
+      </section>
+    <% end %>
   </section>
-
-
-  <section class="location_bar">
-    <form action="/feed" method="POST">
-      <br></br>
-      <input id="city" type="text" placeholder="City" required name="city">
-      <input id="state" type="text" placeholder="State" required name="state">
-      <input type="submit" value="Update Location"/>
-    </form>
-  </section>
-
-  <% if @profile["local_weather"] == "on" %>
-    <section class="weather">
-      <p>The current temperature in <%= @city.gsub("%20", " ") %>, <%= @state %> is <%= @temp_in_f %> degrees.</p>
-    </section>
-  <% end %>
-
-  <% if @profile["nytimes_article_search"] == "on" %>
-    <section class="nytimes_searched">
-      <h2>Searched: Stories on <%= @q %></h2>
-      <% @search_parsed_response["response"]["docs"].each do |article| %>
-        <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
-        <p><%= article["snippet"] %></p>
-        <br></br>
-      <% end %>
-    </section>
-  <% end %>
-
-  <% if @profile["nytimes_most_popular"] == "on" %>
-    <section class="nytimes_most_popular">
-      <h2>Most Popular Stories</h2>
-      <% @parsed_response["results"].each do |article| %>
-        <a href="<%= article["url"] %>"><%= article["title"] %></a>
-        <p><%= article["abstract"] %></p>
-        <br></br>
-      <% end %>
-    </section>
-  <% end %>
-
-  <% if @profile["twitter_my_timeline"] == "on" %>
-    <section class="twitter_my_timeline">
-      <h2>My Twitter Timeline</h2>
-      <% @my_tweets.each do |tweet| %>
-        <p><%= tweet %></p>
-        <br></br>
-      <% end %>
-    </section>
-  <% end %>
-
-    <% if @profile["twitter_search_result"] == "on" %>
-    <section class="twitter_search_result">
-      <h2>Twitter Search Result</h2>
-      <% @twitter_search_result.each do |tweet| %>
-        <p><%= tweet %></p>
-        <br>
-      <% end %>
-    </section>
-  <% end %>
 </section>
