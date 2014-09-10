@@ -127,3 +127,15 @@ html {
   height: 30%;
   text-align: center;
 }
+
+.sample_experience_button{
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 30%;
+  height: 30%;
+  text-align: center;
+}
