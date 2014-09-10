@@ -99,7 +99,7 @@ class App < Sinatra::Base
                               :headers =>{
                                 "Accept" => "application/json"
                                 })
-        session[:instagram_access_token] = instagram_response["access_token"]
+        session[:access_token] = instagram_response["access_token"]
 
     end
     redirect to("/")
@@ -121,14 +121,13 @@ class App < Sinatra::Base
                                   })
       # a hack to get the access code
       # session[:access_token] = facebook_response["access_token"]
-        session[:facebook_access_token] = facebook_response.to_s.split("&")[0].split("=")[1]
+        session[:access_token] = facebook_response.to_s.split("&")[0].split("=")[1]
     end
     redirect to("/")
   end
 
   get('/logout') do
-    session[:facebook_access_token] = nil
-    session[:instagram_access_token] = nil
+    session[:access_token] = nil
     redirect to('/')
   end
 
