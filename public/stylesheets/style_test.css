@@ -6,7 +6,7 @@ html {
   background-size: cover;
 }
 
-a {
+#cool_buttons {
   text-decoration: none;
   padding: 1% 1% 1%;
   border: solid 0.2em white;

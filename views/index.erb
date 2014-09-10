@@ -6,14 +6,14 @@
     </section>
 
     <section class="sample_experience_button">
-      <a href="/feed">Sample the Experience</a>
+      <a id="cool_buttons"href="/feed">Sample the Experience</a>
       <br></br>
       <br></br>
     </section>
 
     <section class="login_button">
       <% if session[:access_token] %>
-        <a href="/logout">Logout</a>
+        <a id="cool_buttons" href="/logout">Logout</a>
       <% else %>
         <a href="<%= @instagram_uri %>">Login with Instagram</a>
         <br></br>
