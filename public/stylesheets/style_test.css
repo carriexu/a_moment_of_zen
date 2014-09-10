@@ -136,8 +136,6 @@ html {
   padding-left: 9%;
 }
 
-#home_page_logo{
-  width: 50px;
-  height: auto;
-  padding-left: 1%;
+#home_link{
+  padding-left: 2%;
 }
