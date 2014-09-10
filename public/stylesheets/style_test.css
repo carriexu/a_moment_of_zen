@@ -10,6 +10,8 @@ html {
   text-decoration: none;
   padding: 1% 1% 1%;
   border: solid 0.2em white;
+  font-color: black;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 
 .profile_info{
@@ -136,6 +138,7 @@ html {
 }
 .home_page_title{
   text-align: center;
+  font-family: Copperplate, "Copperplate Gothic Light", fantasy;
 }
 
 #section_title{
