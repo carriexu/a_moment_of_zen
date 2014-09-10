@@ -12,8 +12,7 @@
 
      <% if @profile["local_weather"] == "on" %>
       <section class="weather">
-        <p><%= @city.gsub("%20", " ") %>, <%= @state %>: </p>
-        <p><%= @temp_in_f %>F</p>
+        <p><%= @city.gsub("%20", " ") %>, <%= @state %>: <%= @temp_in_f %>F</p>
       </section>
     <% end %>
 
