@@ -14,12 +14,12 @@
       <section class="instagram_my_feed">
         <h2>My Instagram</h2>
         <% @insta_response["data"].each do |instagram| %>
-        <div id="insta_image">
+        <section class="insta_image">
           <a href="<%= instagram["link"] %>"><img src="<%= instagram["images"]["low_resolution"]["url"] %>"/></a>
           <br></br>
           <a href="http://instagram.com/<%= instagram["user"]["username"] %>" %><%= instagram["user"]["username"] %></a>
           <br></br>
-        </div>
+        </section>
         <% end %>
       </section>
     <% end %>
@@ -28,12 +28,12 @@
       <section class="instagram_searched_feed">
         <h2>Search Instagram</h2>
         <% @insta_searched_response["data"].each do |instagram| %>
-        <div id="insta_searched_image">
+        <section class="insta_searched_image">
           <a href="<%= instagram["link"] %>"><img src="<%= instagram["images"]["low_resolution"]["url"] %>"/></a>
           <br></br>
           <a href="http://instagram.com/<%= instagram["user"]["username"] %>" %><%= instagram["user"]["username"] %></a>
           <br></br>
-        </div>
+        </section>
         <% end %>
       </section>
     <% end %>
