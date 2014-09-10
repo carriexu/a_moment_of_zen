@@ -6,9 +6,6 @@ html {
   background-size: cover;
 }
 
-.header{
-  text-align: right;
-}
 
 .profile_info{
   text-align: right;
@@ -142,4 +139,5 @@ html {
 
 #my_profile_link{
   padding-right: 2%;
+  text-align: right;
 }
