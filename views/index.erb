@@ -15,9 +15,9 @@
       <% if session[:access_token] %>
         <a id="cool_buttons" href="/logout">Logout</a>
       <% else %>
-        <a href="<%= @instagram_uri %>">Login with Instagram</a>
+        <a id="cool_buttons" href="<%= @instagram_uri %>">Login with Instagram</a>
         <br></br>
-        <a href="<%= @facebook_uri %>">Login with Facebook</a>
+        <a id="cool_buttons" href="<%= @facebook_uri %>">Login with Facebook</a>
         <br></br>
       <% end %>
     </section>
