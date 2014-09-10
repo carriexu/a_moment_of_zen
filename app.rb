@@ -228,7 +228,8 @@ class App < Sinatra::Base
     updated_profile = JSON.parse $redis.get("profile:1")
     updated_profile["name"] = params["name"]
     updated_profile["age"] = params["age"]
-    updated_profile["location"] = params["location"]
+    updated_profile["city"] = params["city"]
+    updated_profile["state"] = params["state"]
     updated_profile["favorite ice-cream flavor"] = params["favorite ice-cream flavor"]
     updated_profile["nytimes_most_popular"] = params["nytimes_most_popular"]
     updated_profile["nytimes_article_search"] = params["nytimes_article_search"]

@@ -10,6 +10,12 @@
       </form>
     </section>
 
+     <% if @profile["local_weather"] == "on" %>
+      <section class="weather">
+        <p><%= @city.gsub("%20", " ") %>, <%= @state %> current temperature: <%= @temp_in_f %> degrees F.</p>
+      </section>
+    <% end %>
+
     <section class="my_instagram">
       <% if @profile["instagram_my_feed"] == "on" %>
         <section class="instagram_my_feed">
@@ -42,25 +48,9 @@
       <br></br>
     </section>
 
-
-    <section class="location_bar">
-      <form action="/feed" method="POST">
-        <br></br>
-        <input id="city" type="text" placeholder="City" required name="city">
-        <input id="state" type="text" placeholder="State" required name="state">
-        <input type="submit" value="Update Location"/>
-      </form>
-    </section>
-
-    <% if @profile["local_weather"] == "on" %>
-      <section class="weather">
-        <p>The current temperature in <%= @city.gsub("%20", " ") %>, <%= @state %> is <%= @temp_in_f %> degrees.</p>
-      </section>
-    <% end %>
-
     <% if @profile["nytimes_article_search"] == "on" %>
       <section class="nytimes_searched">
-        <h2>Searched: Stories on <%= @q %></h2>
+        <h2>NYTimes - Stories on <%= @q %></h2>
         <% @search_parsed_response["response"]["docs"].each do |article| %>
           <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
           <p><%= article["snippet"] %></p>
@@ -71,7 +61,7 @@
 
     <% if @profile["nytimes_most_popular"] == "on" %>
       <section class="nytimes_most_popular">
-        <h2>Most Popular Stories</h2>
+        <h2>Most Popular on NYTimes</h2>
         <% @parsed_response["results"].each do |article| %>
           <a href="<%= article["url"] %>"><%= article["title"] %></a>
           <p><%= article["abstract"] %></p>
@@ -92,7 +82,7 @@
 
       <% if @profile["twitter_search_result"] == "on" %>
       <section class="twitter_search_result">
-        <h2>Twitter Search Result</h2>
+        <h2>Twitter - Searched for <%= @q %></h2>
         <% @twitter_search_result.each do |tweet| %>
           <p><%= tweet %></p>
           <br>
