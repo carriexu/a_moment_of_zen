@@ -49,13 +49,15 @@
     </section>
 
     <% if @profile["nytimes_article_search"] == "on" %>
-      <section class="nytimes_searched">
+      <section class="nytimes">
         <h2>NYTimes - Stories on <%= @q %></h2>
-        <% @search_parsed_response["response"]["docs"].each do |article| %>
-          <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
-          <p><%= article["snippet"] %></p>
-          <br></br>
-        <% end %>
+          <section class="nytimes_searched">
+            <% @search_parsed_response["response"]["docs"].each do |article| %>
+              <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
+              <p><%= article["snippet"] %></p>
+              <br></br>
+            <% end %>
+          </section>
       </section>
     <% end %>
 
