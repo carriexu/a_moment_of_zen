@@ -17,9 +17,15 @@ html {
 }
 
 .insta_image{
+  padding: 3% 1% 3%;
+  border: solid 0.2em white;
+  border-radius: 2em;
   float: left;
 }
 
 .insta_searched_image{
+  padding: 3% 1% 3%;
+  border: solid 0.2em white;
+  border-radius: 2em;
   float: left;
 }
