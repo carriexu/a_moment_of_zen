@@ -74,6 +74,18 @@
       </section>
     <% end %>
 
+    <% if @profile["twitter_search_result"] == "on" %>
+    <section class="twitter_search">
+      <h2 id="section_title">Twitter - Searched for <%= @q %></h2>
+        <section class="twitter_search_result">
+          <% @twitter_search_result.each do |tweet| %>
+            <p><%= tweet %></p>
+            <br>
+          <% end %>
+        </section>
+    </section>
+    <% end %>
+
     <% if @profile["twitter_my_timeline"] == "on" %>
       <section class="twitter_timeline">
         <h2 id="section_title">My Twitter Timeline</h2>
@@ -86,16 +98,5 @@
       </section>
     <% end %>
 
-    <% if @profile["twitter_search_result"] == "on" %>
-    <section class="twitter_search">
-      <h2 id="section_title">Twitter - Searched for <%= @q %></h2>
-        <section class="twitter_search_result">
-          <% @twitter_search_result.each do |tweet| %>
-            <p><%= tweet %></p>
-            <br>
-          <% end %>
-        </section>
-    </section>
-    <% end %>
-  </section>
+</section>
 
