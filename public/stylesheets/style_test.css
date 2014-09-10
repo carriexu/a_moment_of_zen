@@ -140,10 +140,12 @@ a {
 .home_page_title{
   text-align: center;
   font-family: Copperplate, "Copperplate Gothic Light", fantasy;
+  font-size: 120%;
 }
 
 #section_title{
   padding-left: 9%;
+  font-family: Papyrus, fantasy;
 }
 
 #my_profile_link{
