@@ -12,15 +12,15 @@ html {
 }
 
 .instagram_my_feed{
-  text-align: center;
-  padding: 1%;
+  text-align: left;
   float: left;
+  padding-left: 9%;
 }
 
 .instagram_searched_feed{
   text-align: center;
-  padding: 1%;
   float: left;
+  padding-left: 9%;
 }
 
 .insta_image{
