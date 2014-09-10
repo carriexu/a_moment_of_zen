@@ -34,7 +34,7 @@
 
       <% if @profile["instagram_searched_feed"] == "on" %>
         <section class="instagram_searched_feed">
-          <h2>Instagram - Searched for <%= @q %></h2>
+          <h2 id="section_title">Instagram - Searched for <%= @q %></h2>
           <% @insta_searched_response["data"].each do |instagram| %>
             <section class="insta_searched_image">
               <a href="<%= instagram["link"] %>"><img src="<%= instagram["images"]["low_resolution"]["url"] %>"/></a>
@@ -49,8 +49,8 @@
     </section>
 
     <% if @profile["nytimes_article_search"] == "on" %>
-      <section class="nytimes">
-        <h2>NYTimes - Stories on <%= @q %></h2>
+      <section class="nytimes_article_search">
+        <h2 id="section_title">NYTimes - Stories on <%= @q %></h2>
           <section class="nytimes_searched">
             <% @search_parsed_response["response"]["docs"].each do |article| %>
               <a href="<%= article["web_url"] %>"><%= article["headline"]["main"] %></a>
@@ -62,34 +62,40 @@
     <% end %>
 
     <% if @profile["nytimes_most_popular"] == "on" %>
-      <section class="nytimes_most_popular">
-        <h2>Most Popular on NYTimes</h2>
-        <% @parsed_response["results"].each do |article| %>
-          <a href="<%= article["url"] %>"><%= article["title"] %></a>
-          <p><%= article["abstract"] %></p>
-          <br></br>
-        <% end %>
+      <section class ="nytimes_popular">
+        <h2 id="section_title">Most Popular on NYTimes</h2>
+          <section class="nytimes_most_popular">
+            <% @parsed_response["results"].each do |article| %>
+              <a href="<%= article["url"] %>"><%= article["title"] %></a>
+              <p><%= article["abstract"] %></p>
+              <br></br>
+            <% end %>
+          </section>
       </section>
     <% end %>
 
     <% if @profile["twitter_my_timeline"] == "on" %>
-      <section class="twitter_my_timeline">
-        <h2>My Twitter Timeline</h2>
-        <% @my_tweets.each do |tweet| %>
-          <p><%= tweet %></p>
-          <br></br>
-        <% end %>
+      <section class="twitter_timeline">
+        <h2 id="section_title">My Twitter Timeline</h2>
+          <section class="twitter_my_timeline">
+            <% @my_tweets.each do |tweet| %>
+              <p><%= tweet %></p>
+              <br></br>
+            <% end %>
+          </section>
       </section>
     <% end %>
 
-      <% if @profile["twitter_search_result"] == "on" %>
-      <section class="twitter_search_result">
-        <h2>Twitter - Searched for <%= @q %></h2>
-        <% @twitter_search_result.each do |tweet| %>
-          <p><%= tweet %></p>
-          <br>
-        <% end %>
-      </section>
+    <% if @profile["twitter_search_result"] == "on" %>
+    <section class="twitter_search">
+      <h2 id="section_title">Twitter - Searched for <%= @q %></h2>
+        <section class="twitter_search_result">
+          <% @twitter_search_result.each do |tweet| %>
+            <p><%= tweet %></p>
+            <br>
+          <% end %>
+        </section>
+    </section>
     <% end %>
   </section>
 
