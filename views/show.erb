@@ -11,9 +11,11 @@
 
      <% if @profile["local_weather"] == "on" %>
       <section class="weather">
+        <a href="/profile">Go to My Profile</a>
         <p><%= @city.gsub("%20", " ") %>, <%= @state %>: <%= @temp_in_f %>F</p>
       </section>
     <% end %>
+
 
     <section class="my_instagram">
       <% if @profile["instagram_my_feed"] == "on" %>
