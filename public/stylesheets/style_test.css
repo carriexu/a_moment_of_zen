@@ -6,6 +6,10 @@ html {
   background-size: cover;
 }
 
+.header{
+  text-align: right;
+}
+
 .profile_info{
   text-align: right;
   padding: 1% 1% 1%;
