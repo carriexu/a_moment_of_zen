@@ -6,6 +6,9 @@ html {
   background-size: cover;
 }
 
+.a{
+  text-decoration: none;
+}
 
 .profile_info{
   text-align: right;
