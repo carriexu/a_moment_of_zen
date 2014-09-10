@@ -99,7 +99,7 @@ class App < Sinatra::Base
                               :headers =>{
                                 "Accept" => "application/json"
                                 })
-        session[:access_token] = instagram_response["access_token"]
+        session[:instagram_access_token] = instagram_response["access_token"]
 
     end
     redirect to("/")
@@ -121,7 +121,7 @@ class App < Sinatra::Base
                                   })
       # a hack to get the access code
       # session[:access_token] = facebook_response["access_token"]
-        session[:access_token] = facebook_response.to_s.split("&")[0].split("=")[1]
+        session[:facebook_access_token] = facebook_response.to_s.split("&")[0].split("=")[1]
     end
     redirect to("/")
   end
@@ -188,6 +188,7 @@ class App < Sinatra::Base
     @insta_response = JSON.parse response.to_json
     # Instagram Searched by Tag Feed
     # binding.pry
+
     response = HTTParty.get("https://api.instagram.com/v1/tags/#{@q}/media/recent?access_token=391569309.b668170.c4cf70355fa4463690d0264ab3ce3d26")
     @insta_searched_response = JSON.parse response.to_json
     render(:erb, :show)
