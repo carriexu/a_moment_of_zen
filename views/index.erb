@@ -1,22 +1,23 @@
-<section class="home_page_title">
-  <h1>Your Moment of Zen</h1>
+<section class="home_page">
+  <section class="home_page_title">
+    <h1>Your Moment of Zen</h1>
+  </section>
+
+  <section class="login_button">
+    <% if session[:access_token] %>
+      <a href="/logout">Logout</a>
+    <% else %>
+      <a href="<%= @instagram_uri %>">Login with Instagram</a>
+      <br></br>
+      <a href="<%= @facebook_uri %>">Login with Facebook</a>
+      <br></br>
+    <% end %>
+  </section>
+
+  <section>
+    <a href="/feed">Sample the Experience</a>
+  </section>
+
+    <a href="/profile">Go to My Profile</a>
 </section>
-
-<section class="login_button">
-  <% if session[:access_token] %>
-    <a href="/logout">Logout</a>
-  <% else %>
-    <a href="<%= @instagram_uri %>">Login with Instagram</a>
-    <br></br>
-    <a href="<%= @facebook_uri %>">Login with Facebook</a>
-    <br></br>
-  <% end %>
-</section>
-
-<section>
-  <a href="/feed">Sample the Experience</a>
-</section>
-
-  <a href="/profile">Go to My Profile</a>
-
 
