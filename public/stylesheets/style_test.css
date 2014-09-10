@@ -15,12 +15,16 @@ html {
   text-align: left;
   float: left;
   padding-left: 9%;
+  height: 100vh;
+  overflow-y:auto;
 }
 
 .instagram_searched_feed{
   text-align: left;
   float: left;
   padding-left: 9%;
+  height: 100vh;
+  overflow-y:auto;
 }
 
 .insta_image{
@@ -37,4 +41,20 @@ html {
   border-radius: 2em;
   float: left;
   margin: 0 15px 15px 0;
+}
+
+.nytimes_searched{
+  padding: 5%;
+  border: solid 0.2em white;
+  border-radius: 2em;
+  height: 100vh;
+  overflow-y:auto;
+}
+
+.nytimes_most_popular{
+  padding: 5%;
+  border: solid 0.2em white;
+  border-radius: 2em;
+  height: 100vh;
+  overflow-y:auto;
 }
