@@ -113,6 +113,7 @@ html {
 
 .weather{
   text-align: right;
+  padding-right: 50px;
 }
 
 /*absolute center elements on the home page*/
