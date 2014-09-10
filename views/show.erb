@@ -16,29 +16,31 @@
       <section class="instagram_my_feed">
         <h2>My Instagram</h2>
         <% @insta_response["data"].each do |instagram| %>
-        <section class="insta_image">
-          <a href="<%= instagram["link"] %>"><img src="<%= instagram["images"]["low_resolution"]["url"] %>"/></a>
-          <br></br>
-          <a href="http://instagram.com/<%= instagram["user"]["username"] %>" %><%= instagram["user"]["username"] %></a>
-          <br></br>
-        </section>
+          <section class="insta_image">
+            <a href="<%= instagram["link"] %>"><img src="<%= instagram["images"]["low_resolution"]["url"] %>"/></a>
+            <br></br>
+            <a href="http://instagram.com/<%= instagram["user"]["username"] %>" %><%= instagram["user"]["username"] %></a>
+            <br></br>
+          </section>
         <% end %>
       </section>
+      <br></br>
     <% end %>
 
     <% if @profile["instagram_searched_feed"] == "on" %>
       <section class="instagram_searched_feed">
         <h2>Search Instagram</h2>
         <% @insta_searched_response["data"].each do |instagram| %>
-        <section class="insta_searched_image">
-          <a href="<%= instagram["link"] %>"><img src="<%= instagram["images"]["low_resolution"]["url"] %>"/></a>
-          <br></br>
-          <a href="http://instagram.com/<%= instagram["user"]["username"] %>" %><%= instagram["user"]["username"] %></a>
-          <br></br>
-        </section>
+          <section class="insta_searched_image">
+            <a href="<%= instagram["link"] %>"><img src="<%= instagram["images"]["low_resolution"]["url"] %>"/></a>
+            <br></br>
+            <a href="http://instagram.com/<%= instagram["user"]["username"] %>" %><%= instagram["user"]["username"] %></a>
+            <br></br>
+          </section>
         <% end %>
       </section>
     <% end %>
+    <br></br>
   </section>
 
 
