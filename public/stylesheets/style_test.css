@@ -6,3 +6,12 @@ html {
   background-size: cover;
 }
 
+.search_bar{
+  text-align: center;
+  padding: 5% 1% 1%;
+}
+
+.my_instagram{
+  text-align: left;
+  padding: 1%;
+}
