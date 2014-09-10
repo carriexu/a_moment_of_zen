@@ -1,12 +1,18 @@
 <header>
     <nav>
       <div id="my_profile_link">
-        <a href="/profile">Go to My Profile</a>
+        <a href="/profile">Sample Profile</a>
       </div>
     </nav>
 </header>
 
 <section class="my_feeds">
+
+     <% if @profile["local_weather"] == "on" %>
+      <section class="weather">
+        <p><%= @city.gsub("%20", " ") %>, <%= @state %>: <%= @temp_in_f %>F</p>
+      </section>
+    <% end %>
 
     <section class="search_bar">
       <form action="/feed" method="POST">
@@ -15,13 +21,6 @@
         <input type="submit" value="Search"/>
       </form>
     </section>
-
-     <% if @profile["local_weather"] == "on" %>
-      <section class="weather">
-        <p><%= @city.gsub("%20", " ") %>, <%= @state %>: <%= @temp_in_f %>F</p>
-      </section>
-    <% end %>
-
 
     <section class="my_instagram">
       <% if @profile["instagram_my_feed"] == "on" %>
