@@ -4,19 +4,5 @@ html {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
-  text-align: left;
 }
 
-h1 {
-  font-size: 3em;
-  color: black;
-}
-
-p{
-  font-size: 1em;
-  color: black;
-}
-
-h2{
-  text-align: center;
-}
