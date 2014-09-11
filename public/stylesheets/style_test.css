@@ -123,6 +123,13 @@ html {
 .weather{
   /*text-align: right;
   padding-right: 2%;*/
+  color: white;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+
+#white_link{
+  color: white;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
 }
 
 /*absolute center elements on the home page*/
