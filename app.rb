@@ -127,8 +127,13 @@ class App < Sinatra::Base
     redirect to("/")
   end
 
-  get('/logout') do
-    session[:access_token] = nil
+  get('/logout/instagram') do
+    session[:instagram_access_token] = nil
+    redirect to('/')
+  end
+
+  get('/logout/facebook') do
+    session[:facebook_access_token] = nil
     redirect to('/')
   end
 

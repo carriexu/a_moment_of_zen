@@ -1,4 +1,5 @@
 <section class="home_page">
+
   <section class="center_elements_on_home_page">
     <section class="home_page_title">
       <h1>A Moment of Zen</h1>
@@ -12,16 +13,21 @@
     </section>
 
     <section class="login_button">
-      <% if session[:access_token] %>
-        <a id="cool_buttons" href="/logout">Logout</a>
+      <% if session[:instagram_access_token] %>
+        <a id="cool_buttons" href="/logout/instagram">Logout of Instagram</a>
       <% else %>
         <a id="cool_buttons" href="<%= @instagram_uri %>">Login with Instagram</a>
         <br></br>
+      <% end %>
+
+      <% if session[:facebook_access_token] %>
+        <a id="cool_buttons" href="/logout/facebook">Logout of Facebook</a>
+      <% else %>
         <a id="cool_buttons" href="<%= @facebook_uri %>">Login with Facebook</a>
         <br></br>
       <% end %>
     </section>
-
   </section>
+
 </section>
 
