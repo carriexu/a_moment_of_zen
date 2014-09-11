@@ -152,6 +152,12 @@ html {
   padding-right: 2%;
   text-align: right;
 }
+
+#back_to_home_page_link{
+  padding-left: 2%;
+  text-align: left;
+}
+
 #profile_title{
   text-align: center;
 }
