@@ -40,23 +40,25 @@ class App < Sinatra::Base
   # website url: http://127.0.0.1:9292
   # Callback URL: http://127.0.0.1:9292/oauth_callback
 
-  NYTIMES_MOST_POPULAR_API_KEYS = "85eb47a4b49d424d01237d5a8f3cd55b:18:62890239"
-  NYTIMES_ARTICLE_SEARCH_API_KEYS = "a7cae18610fa4d1fb5b005b13a6552f5:16:62890239"
-  TWITTER_API_KEYS = "uOuLYN472FTMDFpfnCv3C5iql"
-  TWITTER_API_SECRET = "QBlplAUdkdJIpGQLl3uOMG0HFgKv1aoSU8RiuVniYRHOF2zRVJ"
-  TWITTER_ACCESS_TOKEN = "509730170-cACt75aeSelrZKpvUcMuGJrH2XIgcIK7GnUrw2rq"
-  TWITTER_ACCESS_TOKEN_SECRET = "L1UixxGbq1kLRPdN00WunhIZczDbw8OdzGzCgiNqZvQUv"
+  NYTIMES_MOST_POPULAR_API_KEYS = ENV["NYTIMES_MOST_POPULAR_API_KEYS"]
+  NYTIMES_ARTICLE_SEARCH_API_KEYS = ENV["NYTIMES_ARTICLE_SEARCH_API_KEYS"]
+  TWITTER_API_KEYS = ENV["TWITTER_API_KEY"]
+  TWITTER_API_SECRET = ENV["TWITTER_API_SECRET"]
+  TWITTER_ACCESS_TOKEN = ENV["TWITTER_ACCESS_TOKEN"]
+  TWITTER_ACCESS_TOKEN_SECRET = ENV["TWITTER_ACCESS_TOKEN_SECRET"]
   # could not get below twitter username to work
   # TWITTER_USERNAME = "carrielovesfood"
-  WUNDERGROUND_API_KEYS = "414d6ac14863ad60"
-  INSTAGRAM_CLIENT_ID = "b668170700ab4a2c8793bdcfcc875806"
-  INSTAGRAM_CLIENT_SECRET = "175b08336c364ea18013ed373dd96f0b"
+  WUNDERGROUND_API_KEYS = ENV["WUNDERGROUND_API_KEYS"]
+  INSTAGRAM_CLIENT_ID = ENV["INSTAGRAM_CLIENT_ID"]
+  INSTAGRAM_CLIENT_SECRET = ENV["INSTAGRAM_CLIENT_SECRET"]
+  # INSTAGRAM_REDIRECT_URL = "http://127.0.0.1:9292/oauth_callback/instagram"
   INSTAGRAM_REDIRECT_URL = "http://infinite-spire-5264.herokuapp.com/oauth_callback/instagram"
-  # could not get below Instagram access token to work as a constant
-  # INSTAGRAM_ACCESS_TOKEN = "391569309.b668170.c4cf70355fa4463690d0264ab3ce3d26"
-  FACEBOOK_CLIENT_ID = "620638748048605"
-  FACEBOOK_CLIENT_SECRET ="27b3f2001171930dcf0c475124972b12"
+
+  FACEBOOK_CLIENT_ID = ENV["FACEBOOK_CLIENT_ID"]
+  FACEBOOK_CLIENT_SECRET = ENV["FACEBOOK_CLIENT_SECRET"]
+  # FACEBOOK_REDIRECT_URL = "http://127.0.0.1:9292/oauth_callback/facebook"
   FACEBOOK_REDIRECT_URL = "http://infinite-spire-5264.herokuapp.com/oauth_callback/facebook"
+
 
   ########################
   # Routes
@@ -99,8 +101,7 @@ class App < Sinatra::Base
                               :headers =>{
                                 "Accept" => "application/json"
                                 })
-        session[:access_token] = instagram_response["access_token"]
-
+        session[:instagram_access_token] = instagram_response["access_token"]
     end
     redirect to("/")
   end
@@ -121,7 +122,7 @@ class App < Sinatra::Base
                                   })
       # a hack to get the access code
       # session[:access_token] = facebook_response["access_token"]
-        session[:access_token] = facebook_response.to_s.split("&")[0].split("=")[1]
+        session[:facebook_access_token] = facebook_response.to_s.split("&")[0].split("=")[1]
     end
     redirect to("/")
   end
@@ -184,12 +185,13 @@ class App < Sinatra::Base
 
 
     # Instagram My feed
-    response = HTTParty.get("https://api.instagram.com/v1/users/self/feed?access_token=391569309.b668170.c4cf70355fa4463690d0264ab3ce3d26")
+    insta_access_token = session[:instagram_access_token]
+    response = HTTParty.get("https://api.instagram.com/v1/users/self/feed?access_token=#{insta_access_token}")
     @insta_response = JSON.parse response.to_json
     # Instagram Searched by Tag Feed
     # binding.pry
 
-    response = HTTParty.get("https://api.instagram.com/v1/tags/#{@q}/media/recent?access_token=391569309.b668170.c4cf70355fa4463690d0264ab3ce3d26")
+    response = HTTParty.get("https://api.instagram.com/v1/tags/#{@q}/media/recent?access_token=#{insta_access_token}")
     @insta_searched_response = JSON.parse response.to_json
     render(:erb, :show)
     # Instagram Searched by Location Feed
