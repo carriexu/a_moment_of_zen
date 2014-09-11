@@ -1,6 +1,6 @@
 require './application_controller'
 
-class App < SApplicationController
+class App < ApplicationController
 
   ########################
   # API KEYS
