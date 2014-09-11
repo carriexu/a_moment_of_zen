@@ -151,11 +151,13 @@ html {
 #my_profile_link{
   padding-right: 2%;
   text-align: right;
+  width: 50%;
 }
 
 #back_to_home_page_link{
   padding-left: 2%;
   text-align: left;
+  width: 50%;
 }
 
 #profile_title{
