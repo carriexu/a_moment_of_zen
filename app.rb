@@ -103,7 +103,7 @@ class App < Sinatra::Base
                                 })
         session[:instagram_access_token] = instagram_response["access_token"]
     end
-    redirect to("/")
+    redirect to("/feed")
   end
 
   get('/oauth_callback/facebook') do
