@@ -121,7 +121,7 @@ html {
 }
 
 .weather{
-  t/*ext-align: right;
+  /*text-align: right;
   padding-right: 2%;*/
 }
 
@@ -168,4 +168,8 @@ html {
 
 #insta_section_title{
   font-family: "Goudy Old Style", Garamond, "Big Caslon", "Times New Roman", serif;
+}
+
+.login_button{
+  padding-top: 50px;
 }
