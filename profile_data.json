@@ -2,12 +2,10 @@
   "profile_data":[
   {
     "name": "Carrie",
-    "age": 23,
-    "location": "New York",
-    "favorite ice-cream flavor": "black sesame",
-    "query": "food",
     "city": "New York",
     "state": "NY",
+    "favorite ice-cream flavor": "black sesame",
+    "query": "food",
     "nytimes_most_popular": "off",
     "nytimes_article_search": "off",
     "local_weather": "off",
