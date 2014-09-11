@@ -124,7 +124,7 @@ class App < Sinatra::Base
       # session[:access_token] = facebook_response["access_token"]
         session[:facebook_access_token] = facebook_response.to_s.split("&")[0].split("=")[1]
     end
-    redirect to("/")
+    redirect to("/feed")
   end
 
   get('/logout/instagram') do
