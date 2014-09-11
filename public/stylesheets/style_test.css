@@ -121,8 +121,8 @@ html {
 }
 
 .weather{
-  text-align: right;
-  padding-right: 2%;
+  t/*ext-align: right;
+  padding-right: 2%;*/
 }
 
 /*absolute center elements on the home page*/
@@ -151,13 +151,15 @@ html {
 #my_profile_link{
   padding-right: 2%;
   text-align: right;
-  width: 50%;
+  width: 40%;
+  float: right;
 }
 
 #back_to_home_page_link{
   padding-left: 2%;
   text-align: left;
-  width: 50%;
+  width: 40%;
+  float: left;
 }
 
 #profile_title{
