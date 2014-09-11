@@ -1,37 +1,6 @@
-require 'sinatra/base'
-require 'json'
-require 'redis'
-require 'httparty'
-require 'pry' if ENV["RACK_ENV"] == "development"
-require 'securerandom'
-require 'twitter'
-require 'uri'
+require './application_controller'
 
-class App < Sinatra::Base
-
-  ########################
-  # Configuration
-  ########################
-
-  configure do
-    enable :logging
-    enable :method_override
-    enable :sessions
-    set :session_secret, 'super_secret'
-    uri = URI.parse(ENV["REDISTOGO_URL"])
-    $redis = Redis.new({:host => uri.host,
-                        :port => uri.port,
-                        :password => uri.password})
-  end
-
-  before do
-    logger.info "Request Headers: #{headers}"
-    logger.warn "Params: #{params}"
-  end
-
-  after do
-    logger.info "Response Headers: #{response.headers}"
-  end
+class App < SApplicationController
 
   ########################
   # API KEYS
@@ -69,13 +38,12 @@ class App < Sinatra::Base
     instagram_base_url = "https://api.instagram.com/oauth/authorize"
     instagram_scope = "user"
     instagram_state = SecureRandom.urlsafe_base64
+    # storing state in session because we need to compare it in a later request
+    session[:instagram_state] = instagram_state
 
     facebook_base_url = "https://www.facebook.com/dialog/oauth"
     facebook_scope = "public_profile"
     facebook_state = SecureRandom.urlsafe_base64
-    # storing state in session because we need to compare it in a later request
-    # the following does not work, cannot set session[:state] to both instagram_state and facebook_state
-    session[:instagram_state] = instagram_state
     session[:facebook_state] = facebook_state
 
     @instagram_uri = "#{instagram_base_url}?client_id=#{INSTAGRAM_CLIENT_ID}&redirect_uri=#{INSTAGRAM_REDIRECT_URL}&response_type=code&state=#{instagram_state}"
