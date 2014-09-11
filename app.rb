@@ -36,13 +36,13 @@ class App < ApplicationController
   get('/') do
     # Instagram OAuth
     instagram_base_url = "https://api.instagram.com/oauth/authorize"
-    instagram_scope = "user"
+    # instagram_scope = "user"
     instagram_state = SecureRandom.urlsafe_base64
     # storing state in session because we need to compare it in a later request
     session[:instagram_state] = instagram_state
 
     facebook_base_url = "https://www.facebook.com/dialog/oauth"
-    facebook_scope = "public_profile"
+    # facebook_scope = "public_profile"
     facebook_state = SecureRandom.urlsafe_base64
     session[:facebook_state] = facebook_state
 
@@ -180,6 +180,8 @@ class App < ApplicationController
   #   @profile = JSON.parse $redis.get("profile:1")
   # end
   # updates the location and search keyword
+
+
   post('/feed') do
     original_profile = JSON.parse $redis.get("profile:1")
     updated_profile = JSON.parse $redis.get("profile:1")
