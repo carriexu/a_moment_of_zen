@@ -123,7 +123,7 @@ class App < ApplicationController
 
 
   get('/feed') do
-    @profile = JSON.parse $redis.get("profile:1")
+    # @profile = JSON.parse $redis.get("profile:1")
     # NYTIMES Most Popular Stories
     response = HTTParty.get("http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/1.json?api-key=#{NYTIMES_MOST_POPULAR_API_KEYS}&offset=20")
     @parsed_response = JSON.parse response.to_json
@@ -234,5 +234,6 @@ class App < ApplicationController
   end
 end
 
-
-# fake code
+# def current_profile
+#   @profile || JSON.parse $redis.get("profile:1")
+# end
