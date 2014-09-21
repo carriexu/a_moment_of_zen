@@ -20,8 +20,8 @@ class App < ApplicationController
   WUNDERGROUND_API_KEYS = ENV["WUNDERGROUND_API_KEYS"]
   INSTAGRAM_CLIENT_ID = ENV["INSTAGRAM_CLIENT_ID"]
   INSTAGRAM_CLIENT_SECRET = ENV["INSTAGRAM_CLIENT_SECRET"]
-  # INSTAGRAM_REDIRECT_URL = "http://127.0.0.1:9393/oauth_callback/instagram"
-  INSTAGRAM_REDIRECT_URL = "http://infinite-spire-5264.herokuapp.com/oauth_callback/instagram"
+  INSTAGRAM_REDIRECT_URL = "http://127.0.0.1:9393/oauth_callback/instagram"
+  # INSTAGRAM_REDIRECT_URL = "http://infinite-spire-5264.herokuapp.com/oauth_callback/instagram"
 
   FACEBOOK_CLIENT_ID = ENV["FACEBOOK_CLIENT_ID"]
   FACEBOOK_CLIENT_SECRET = ENV["FACEBOOK_CLIENT_SECRET"]
@@ -160,15 +160,17 @@ class App < ApplicationController
       "#{tweet.user.screen_name}: #{tweet.text}"
     end
 
-
     # Instagram My feed
     insta_access_token = session[:instagram_access_token]
     response = HTTParty.get("https://api.instagram.com/v1/users/self/feed?access_token=#{insta_access_token}")
     @insta_response = JSON.parse response.to_json
     # Instagram Searched by Tag Feed
-    # binding.pry
+    # Currently Instagram only support single tag, people entering in multiple words will break the search function
+    # hack soution - only take the first word they type in
+    # @insta_q = @q.split("%20")[0]
+    @insta_q = @q.gsub("%20", "")
 
-    response = HTTParty.get("https://api.instagram.com/v1/tags/#{@q}/media/recent?access_token=#{insta_access_token}")
+    response = HTTParty.get("https://api.instagram.com/v1/tags/#{@insta_q}/media/recent?access_token=#{insta_access_token}")
     @insta_searched_response = JSON.parse response.to_json
     render(:erb, :show)
     # Instagram Searched by Location Feed
