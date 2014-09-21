@@ -20,8 +20,8 @@ class App < ApplicationController
   WUNDERGROUND_API_KEYS = ENV["WUNDERGROUND_API_KEYS"]
   INSTAGRAM_CLIENT_ID = ENV["INSTAGRAM_CLIENT_ID"]
   INSTAGRAM_CLIENT_SECRET = ENV["INSTAGRAM_CLIENT_SECRET"]
-  INSTAGRAM_REDIRECT_URL = "http://127.0.0.1:9393/oauth_callback/instagram"
-  # INSTAGRAM_REDIRECT_URL = "http://infinite-spire-5264.herokuapp.com/oauth_callback/instagram"
+  # INSTAGRAM_REDIRECT_URL = "http://127.0.0.1:9393/oauth_callback/instagram"
+  INSTAGRAM_REDIRECT_URL = "http://infinite-spire-5264.herokuapp.com/oauth_callback/instagram"
 
   FACEBOOK_CLIENT_ID = ENV["FACEBOOK_CLIENT_ID"]
   FACEBOOK_CLIENT_SECRET = ENV["FACEBOOK_CLIENT_SECRET"]
