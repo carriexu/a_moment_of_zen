@@ -20,8 +20,8 @@ class App < ApplicationController
   WUNDERGROUND_API_KEYS = ENV["WUNDERGROUND_API_KEYS"]
   INSTAGRAM_CLIENT_ID = ENV["INSTAGRAM_CLIENT_ID"]
   INSTAGRAM_CLIENT_SECRET = ENV["INSTAGRAM_CLIENT_SECRET"]
-  # INSTAGRAM_REDIRECT_URL = "http://127.0.0.1:9292/oauth_callback/instagram"
-  INSTAGRAM_REDIRECT_URL = "http://infinite-spire-5264.herokuapp.com/oauth_callback/instagram"
+  INSTAGRAM_REDIRECT_URL = "http://127.0.0.1:9393/oauth_callback/instagram"
+  # INSTAGRAM_REDIRECT_URL = "http://infinite-spire-5264.herokuapp.com/oauth_callback/instagram"
 
   FACEBOOK_CLIENT_ID = ENV["FACEBOOK_CLIENT_ID"]
   FACEBOOK_CLIENT_SECRET = ENV["FACEBOOK_CLIENT_SECRET"]
@@ -34,6 +34,7 @@ class App < ApplicationController
   ########################
 
   get('/') do
+
     # Instagram OAuth
     instagram_base_url = "https://api.instagram.com/oauth/authorize"
     # instagram_scope = "user"
@@ -52,6 +53,7 @@ class App < ApplicationController
   end
 
   get('/oauth_callback/instagram') do
+
     # Instagram OAuth
     # puts session
     # state = params[:state]
@@ -92,6 +94,7 @@ class App < ApplicationController
       # session[:access_token] = facebook_response["access_token"]
         session[:facebook_access_token] = facebook_response.to_s.split("&")[0].split("=")[1]
     end
+    binding.pry
     redirect to("/feed")
   end
 
@@ -123,7 +126,7 @@ class App < ApplicationController
 
 
   get('/feed') do
-    # @profile = JSON.parse $redis.get("profile:1")
+    @profile = JSON.parse $redis.get("profile:1")
     # NYTIMES Most Popular Stories
     response = HTTParty.get("http://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/1.json?api-key=#{NYTIMES_MOST_POPULAR_API_KEYS}&offset=20")
     @parsed_response = JSON.parse response.to_json
