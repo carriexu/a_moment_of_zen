@@ -94,7 +94,7 @@ class App < ApplicationController
       # session[:access_token] = facebook_response["access_token"]
         session[:facebook_access_token] = facebook_response.to_s.split("&")[0].split("=")[1]
     end
-    binding.pry
+
     redirect to("/feed")
   end
 
@@ -137,7 +137,8 @@ class App < ApplicationController
     response = HTTParty.get("http://api.wunderground.com/api/#{WUNDERGROUND_API_KEYS}/conditions/geolookup/conditions/q/#{@state}/#{@city}.json")
     @temp_in_f = response["current_observation"]["temp_f"]
     # NYTIMES Search Articles
-    @q =  @profile["query"]
+
+    @q =  @profile["query"].gsub(" ", "%20")
     search_response = HTTParty.get("http://api.nytimes.com/svc/search/v2/articlesearch.json?q=#{@q}&api-key=#{NYTIMES_ARTICLE_SEARCH_API_KEYS}")
     @search_parsed_response = JSON.parse search_response.to_json
     # Configure Twitter
