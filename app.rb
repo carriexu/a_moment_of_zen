@@ -156,7 +156,6 @@ class App < ApplicationController
       tweet_text = tweet.text
       @my_tweets << tweet_text
     end
-    binding.pry
     # Twitter Search Results display 10 random results
     @twitter_search_result = client.search("#{@q}", :result_type => "recent").take(10).collect do |tweet|
       "#{tweet.user.screen_name}: #{tweet.text}"
