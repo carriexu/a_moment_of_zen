@@ -21,12 +21,13 @@ class App < ApplicationController
   INSTAGRAM_CLIENT_ID = ENV["INSTAGRAM_CLIENT_ID"]
   INSTAGRAM_CLIENT_SECRET = ENV["INSTAGRAM_CLIENT_SECRET"]
   # INSTAGRAM_REDIRECT_URL = "http://127.0.0.1:9393/oauth_callback/instagram"
-  INSTAGRAM_REDIRECT_URL = "http://infinite-spire-5264.herokuapp.com/oauth_callback/instagram"
+  INSTAGRAM_REDIRECT_URL = "https://a-moment-of-zen.herokuapp.com/oauth_callback/instagram"
 
   FACEBOOK_CLIENT_ID = ENV["FACEBOOK_CLIENT_ID"]
   FACEBOOK_CLIENT_SECRET = ENV["FACEBOOK_CLIENT_SECRET"]
   # FACEBOOK_REDIRECT_URL = "http://127.0.0.1:9292/oauth_callback/facebook"
-  FACEBOOK_REDIRECT_URL = "http://infinite-spire-5264.herokuapp.com/oauth_callback/facebook"
+  # http://infinite-spire-5264.herokuapp.com
+  FACEBOOK_REDIRECT_URL = "https://a-moment-of-zen.herokuapp.com/oauth_callback/facebook"
 
 
   ########################
@@ -155,7 +156,7 @@ class App < ApplicationController
       tweet_text = tweet.text
       @my_tweets << tweet_text
     end
-
+    binding.pry
     # Twitter Search Results display 10 random results
     @twitter_search_result = client.search("#{@q}", :result_type => "recent").take(10).collect do |tweet|
       "#{tweet.user.screen_name}: #{tweet.text}"
